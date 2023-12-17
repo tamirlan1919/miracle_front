@@ -141,7 +141,7 @@ const ProductCard = () => {
               </button>
             )}
 
-            <Link to={`http://127.0.0.1:3000/products/${product.attributes?.slug}/${product?.id}`}>
+            <Link to={`/products/${product.attributes?.slug}/${product?.id}`}>
               <img
                 src={`${product.attributes?.image.data.attributes.url}`}
                 alt={product.attributes?.name}

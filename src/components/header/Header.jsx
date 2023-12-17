@@ -72,8 +72,8 @@ const Header = () => {
             <ul className="flex uppercase text-[14px] leading-6 justify-center  text-black">
               <li className='mr-20'><a href="/">Бренды</a></li>
               <li className='mr-20'><a href="/">Акции</a></li>
-              <li className='mr-20'><a href="http://127.0.0.1:3000/work">Вакансии</a></li>
-              <li><a href="http://127.0.0.1:3000/about">О нас</a></li>
+              <li className='mr-20'><a href="/work">Вакансии</a></li>
+              <li><a href="/about">О нас</a></li>
             </ul>
           </div>
         </nav>
