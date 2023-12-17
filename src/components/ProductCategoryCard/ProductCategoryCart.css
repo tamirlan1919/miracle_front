@@ -1,0 +1,18 @@
+.cart:hover .heart{
+    transition-duration: 0.4s;
+
+    opacity: 1;
+}
+.heart{
+    transition-duration: 0.4s;
+    opacity: 0;
+}
+.cart:hover {
+    transition-duration: 0.4s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add your preferred box shadow style here */
+  }
+  
+.cart{
+    transition-duration: 0.4s;
+
+}

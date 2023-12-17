@@ -1,0 +1,79 @@
+.cart:hover .heart{
+    transition-duration: 0.4s;
+    opacity: 1;
+}
+
+.heart{
+    transition-duration: 0.4s;
+    opacity: 0;
+}
+.cart:hover {
+    transition-duration: 0.4s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add your preferred box shadow style here */
+  }
+  
+.cart{
+    transition-duration: 0.4s;
+
+}
+.loader {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 160px 0px;
+  }
+  
+  .basket{
+    opacity: 0;
+    background-color: gray;
+
+}
+
+.cart:hover .basket{
+    transition-duration: 0.4s;
+    background-color: gray;
+    opacity: 1;
+}
+.bask{
+
+}
+.back::hover{
+    border: 1px solid red;
+    background-color: black;
+}
+
+@media(max-width:991px){
+    .wrap{
+        margin-right: 0px;
+    }
+    .wrap button{
+        opacity: 1;
+    }
+    .wrap {
+        opacity: 1;
+    }
+    .basket{
+        opacity: 1;
+    }
+}
+
+@media(max-width:767px){
+    .wrap{
+        justify-content: center;
+        text-align: center;
+        margin: 0 auto;
+
+    }
+    .wrap button{
+        opacity: 1;
+    }
+    .wrap {
+        opacity: 1;
+    }
+    .basket{
+        opacity: 1;
+    }
+}
+

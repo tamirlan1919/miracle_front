@@ -1,0 +1,105 @@
+/* AuthComponent.css */
+
+.auth-container {
+  width: 300px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.close {
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.auth-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.subLabel {
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.username {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.username input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.username.error input {
+  border-color: #ff0000;
+}
+
+.error-message {
+  color: #ff0000;
+  font-size: 0.875rem;
+  margin-top: 5px;
+}
+
+.button-auth-start {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.button-auth-start:hover {
+  background-color: #0056b3;
+}
+
+.footer {
+  margin-top: 20px;
+  font-size: 0.875rem;
+}
+
+.footer span {
+  color: #007bff;
+  cursor: pointer;
+}
+
+.socials {
+  margin-top: 20px;
+}
+
+.socials img {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.show-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.show-more-item {
+  color: #007bff;
+  cursor: pointer;
+  margin-right: 10px;
+}

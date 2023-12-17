@@ -1,0 +1,115 @@
+.lst {
+  font-family: 'Monsoserat';
+    
+}
+
+.net{
+  
+  font-family: 'Lobster Two', sans-serif;
+
+}
+.miracle{
+
+}
+.miracle_img{
+
+}
+.btns:hover{
+  color: #028103;
+  transition: .8s;
+}
+.wrap{
+  float: right;
+}
+
+.sticky-top{
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Число можно настроить в зависимости от вашего дизайна */
+  background-color: white; /* Цвет фона хедера при прилипании */
+}
+@media(max-width:1023px){
+  .imgs{
+    display: none;
+  }
+}
+.list{
+  background-color: linear-gradient(140deg, #077408 17.86%, #000 58.15%);
+}
+.home,.menu{
+  display: none;
+}
+.btns{
+  margin-right: 10px;
+}
+.wrap{
+  align-items: center;
+}
+@media(max-width:991px){
+  .home,.menu{
+    display: block;
+  }
+  .users{
+    width: 100%;
+    z-index: 999;
+    background-color: white;
+    position:fixed;
+
+    bottom: 5px;
+    left: 0px;
+    
+    right: 0px;
+    padding-left: 0px;
+    justify-content: space-around;
+  }
+  .wrap{
+    padding: 5px;
+   float: none;
+   width: 100%;
+   justify-content: space-around;
+
+   
+  }
+  .catalog{
+    display: none;
+
+  }
+  nav{
+    display: none;
+  }
+  .poisk{
+    margin-top: 30px;
+  }
+
+}
+.my_btn{
+  border: none;
+}
+.bs{
+  
+  margin: 0 auto;
+}
+.cartt span{
+  font-size: 15px;
+  position: relative;
+  background-color: white;
+  color: #077408;
+  left: -10px;
+}
+.favorite span{
+  font-size: 15px;
+  position: relative;
+  background-color: white;
+  color: #077408;
+  left: -20px;
+}
+
+.imgs{
+  align-self: center;
+}
+.user{
+  align-self: center;
+}
+.net{
+  display: none;
+}

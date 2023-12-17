@@ -1,0 +1,121 @@
+/* ... existing styles ... */
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.product_item {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+
+  .image {
+    img {
+      width: 100%;
+      border-radius: 8px;
+    }
+  }
+
+  // ... other styles ...
+
+  .amount {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+
+    button {
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      padding: 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: black;
+      }
+    }
+
+    .select_amout {
+      margin: 0 10px;
+
+      select {
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .favorite {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+
+      svg {
+        font-size: 24px;
+        color: #e74c3c;
+        transition: color 0.3s ease;
+      }
+
+      &:hover {
+        svg {
+          color: #c0392b;
+        }
+      }
+    }
+  }
+}
+
+/* ... other styles ... */
+
+.empty_cart {
+  height: 500px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  flex-direction: column;
+  align-items: center;
+  button {
+    border: 1px solid black;
+    background-color: inherit;
+    padding: 5px 0px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    font-size: 16px;
+    min-width: 400px;
+
+    &:hover {
+      transition-duration: 0.3s;
+      background-color: #028103;
+      color: white;
+    }
+  }
+}
+  .empty_title {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    align-items: center;
+    line-height: 80px;
+    span {
+      font-size: 25px;
+      font-weight: 200;
+    }
+  }
+
