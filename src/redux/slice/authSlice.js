@@ -19,7 +19,7 @@ export const login = createAsyncThunk("/login", async (params) => {
     console.warn({
       error: error?.message,
     });
-    alert(error);
+    
   }
 });
 
@@ -29,6 +29,7 @@ export const regist = createAsyncThunk("/register", async (params) => {
     if (data.jwt) {
       storeUser(data);
     }
+    
     return data;
   } catch (error) {
     console.warn({

@@ -25,6 +25,7 @@ export default function Registration() {
   const navigate = useNavigate();
   const { jwt } = userData();
   const [error, setError] = React.useState(null);
+  const [successMessage, setSuccessMessage] = React.useState(null);
 
   React.useEffect(() => {
     if (jwt) navigate('/');
@@ -39,17 +40,21 @@ export default function Registration() {
 
     try {
       const request = await dispatch(regist({ username: name, email: email, password: password }));
-
-      if (!request.payload.jwt) {
-        // Ошибка при регистрации
-        setError('Произошла ошибка при регистрации');
-      } else {
+  
+      if (regist.rejected.match(request)) {
+        // Обработка ошибки регистрации
+        setError(request.payload);
+      } else if (request.payload && request.payload.confirmed === false) {
+        // Успешная регистрация, перенаправление на страницу проверки почты
+        setSuccessMessage('Регистрация успешна! Пожалуйста, проверьте вашу почту.');
+        setError(null);
+      } else if (request.payload && request.payload.jwt) {
         // Успешная регистрация
+        setSuccessMessage('Регистрация успешна!');
         setError(null);
         navigate('/');
       }
     } catch (error) {
-      // Обработка других ошибок
       console.warn('Registration error:', error);
       setError('Произошла ошибка при регистрации');
     }
@@ -126,10 +131,15 @@ export default function Registration() {
                 Sign Up
               </Button>
               {error && (
-                <Typography variant="body2" color="error">
-                  {error}
-                </Typography>
-              )}
+          <Typography variant="body2" color="error">
+            {error}
+          </Typography>
+        )}
+        {successMessage && (
+          <Typography variant="body2" color="success">
+            {successMessage}
+          </Typography>
+        )}
               <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Link href="/login" variant="body2">

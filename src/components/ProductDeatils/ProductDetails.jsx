@@ -226,7 +226,7 @@ const ProductDetails = () => {
   };
   useEffect(() => {
     if (products && products.attributes?.image && products.attributes?.image.data) {
-      setMainImage(`${process.env.REACT_APP_UPLOAD_URL + products.attributes?.image.data.attributes.url}`);
+      setMainImage(`${products.attributes?.image.data.attributes.url}`);
     }
   }, [products]);
 
@@ -257,7 +257,7 @@ const ProductDetails = () => {
                     width={'150px'}
                     alt={`Product ${index}`}
                     className="thumbnail mb-2 rounded-lg"
-                    onMouseOver={() => setMainImage(`${process.env.REACT_APP_UPLOAD_URL + image.attributes.url}`)}
+                    onMouseOver={() => setMainImage(`${image.attributes.url}`)}
                   />
                 ))
               )}
