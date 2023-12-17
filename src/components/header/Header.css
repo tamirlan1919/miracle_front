@@ -23,7 +23,9 @@
 }
 
 .sticky-top{
-  position: sticky;
+  position: fixed;
+  left: 0;
+  right: 0;
   top: 0;
   z-index: 1000; /* Число можно настроить в зависимости от вашего дизайна */
   background-color: white; /* Цвет фона хедера при прилипании */

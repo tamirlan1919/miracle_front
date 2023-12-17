@@ -23,6 +23,7 @@ import { NotPage } from './pages/NotPage/NotPage';
 import Logout from './components/Logout';
 import Profile from './pages/Profile/Profile';
 import AllCategory from './pages/AllCategory/AllCategory';
+import SearchResults from './pages/SearchResults/SearchResults';
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
       <Route path="cart" element={<Cart />} />
       <Route path="profile" element={<Profile />} />
       <Route path='category' element = {<AllCategory/>}/>
+      <Route path="/search-results/:query" element={<SearchResults/>} />
       <Route path="categories/:categorySlug" element={<CategoryPage/>} />
       <Route path="brands/:slug" element={<BrandProducts/>} />
       <Route element={<NotPage/>} />

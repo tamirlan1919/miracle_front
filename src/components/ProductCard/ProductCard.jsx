@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaHeart } from 'react-icons/fa';
 import './ProductCard.css';
 import { getProducts } from '../../redux/slice/productSlice';
@@ -12,7 +12,7 @@ import styles from './ProductCard.scss'
 const ProductCard = () => {
   const { products, status } = useSelector((state) => state.products);
   const { data } = useSelector((state) => state.auth);
- 
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -125,21 +125,33 @@ const ProductCard = () => {
       <div className="row">
         {products?.map((product) => (
           <div key={product?.id} className="max-w-sm cart col-xl-3 col-lg-4 col-md-6 col-sm-12 rounded-lg overflow-hidden wrap">
-            {isProductFavorite(product.id) ? (
-              <button
-                onClick={() => handleToggleFavorite(product.id)}
-                className="py-1 relative heart text-center float-right top-[30px] right-[30px] text-white rounded"
-              >
-                <FaHeart className="inline-block mr-1 text-2xl text-black hover:text-gray-300 transition-colors duration-300 " />
-              </button>
-            ) : (
-              <button
-                onClick={() => handleToggleFavorite(product.id)}
-                className="py-1 relative heart text-center float-right top-[30px] right-[30px] text-white rounded"
-              >
-                <FaHeart className="inline-block mr-1 text-2xl text-gray-300 hover:text-black transition-colors duration-300 " />
-              </button>
-            )}
+            {data ?(
+              <>
+    {isProductFavorite(product.id) ? (
+      <button
+        onClick={() => handleToggleFavorite(product.id)}
+        className="py-1 relative heart text-center float-right top-[30px] right-[30px] text-white rounded"
+      >
+        <FaHeart className="inline-block mr-1 text-2xl text-black hover:text-gray-300 transition-colors duration-300 " />
+      </button>
+    ) : (
+      <button
+        onClick={() => handleToggleFavorite(product.id)}
+        className="py-1 relative heart text-center float-right top-[30px] right-[30px] text-white rounded"
+      >
+        <FaHeart className="inline-block mr-1 text-2xl text-gray-300 hover:text-black transition-colors duration-300 " />
+      </button>
+    )}
+    </>
+            ):
+            <button
+            onClick={() => navigate('/login')}
+            className="py-1 relative heart text-center float-right top-[30px] right-[30px] text-white rounded"
+          >
+            <FaHeart className="inline-block mr-1 text-2xl text-gray-300 hover:text-black transition-colors duration-300 " />
+          </button>
+            }
+        
 
             <Link to={`/products/${product.attributes?.slug}/${product?.id}`}>
               <img
@@ -155,21 +167,33 @@ const ProductCard = () => {
               <div className="flex">{calculateDisplayPrice(product)}</div>
 
               <div className="mt-2 basket">
-              {isProductInCart(product.id) ? (
-                  <button
-                    onClick={() => handleAddToCart(product.id)}
-                    className="bg-black basket float-right hover:bg-gray-300 transition-colors duration-300 relative top-[-10px] w-[50px] h-[50px] text-white rounded-[50%]"
-                  >
-                    <AiOutlineShopping className="text-2xl inline-block" />
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => handleAddToCart(product.id)}
-                    className="bg-gray-300 basket float-right hover:bg-black transition-colors duration-300 relative top-[-10px] w-[50px] h-[50px] text-white rounded-[50%]"
-                  >
-                    <AiOutlineShopping className="text-2xl inline-block" />
-                  </button>
-                )}
+              {data ? (
+  <>
+    {isProductInCart(product.id) ? (
+      <button
+        onClick={() => handleAddToCart(product.id)}
+        className="bg-black basket float-right hover:bg-gray-300 transition-colors duration-300 relative top-[-10px] w-[50px] h-[50px] text-white rounded-[50%]"
+      >
+        <AiOutlineShopping className="text-2xl inline-block" />
+      </button>
+    ) : (
+      <button
+        onClick={() => handleAddToCart(product.id)}
+        className="bg-gray-300 basket float-right hover:bg-black transition-colors duration-300 relative top-[-10px] w-[50px] h-[50px] text-white rounded-[50%]"
+      >
+        <AiOutlineShopping className="text-2xl inline-block" />
+      </button>
+    )}
+  </>
+) : (
+  <button
+    onClick={() => navigate('/login')}
+    className="bg-gray-300 basket float-right hover:bg-black transition-colors duration-300 relative top-[-10px] w-[50px] h-[50px] text-white rounded-[50%]"
+  >
+    <AiOutlineShopping className="text-2xl inline-block" />
+  </button>
+)}
+
 
                 {addedProduct === product.id && (
                   <div className="fixed top-0 right-0 p-2 bg-green-500 text-white rounded-md">

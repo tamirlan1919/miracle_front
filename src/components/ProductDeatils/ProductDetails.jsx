@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaHeart } from 'react-icons/fa';
 import { getProductId} from '../../redux/slice/productSlice';
 import { authMe, postProductInCart, postProductInFavorite } from "../../redux/slice/authSlice";
-import axios, { all } from 'axios';
+import axios from '../../api.js';
 import  './ProductDeatils.css'; // Ensure the correct path
 import ProductDetailsInfo from './ProductDetailsInfo';
 import ProductDetailsInfoDouble from './ProductDetailsInfoDouble';
@@ -33,7 +33,7 @@ const ProductDetails = () => {
   }, [dispatch, id]);
 
 
-
+  const navigate = useNavigate()
   const [selectedVolume, setSelectedVolume] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -46,9 +46,9 @@ const ProductDetails = () => {
     // Fetch data from the API when the component mounts
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/products?populate=*`, {
+        const response = await axios.get(`/products?populate=*`, {
           headers: {
-            Authorization: 'Bearer ' + process.env.REACT_APP_API_TOKEN,
+            Authorization: 'Bearer ' + '3d88455b557a9ed455d8a8fdeaffd78b2cb3946c64457604faafd861a095e4d61c39a59431c3d804ea47489794812eca0caa91a2cc5c87938b3cdd744b163e6965ec973c4676543df51e5365aef02e252188c1bedf7188b08b8843addd2dcf7346c6f3ea4461a6e842652f7f1c3a9f5ea25aee760cbd299f327fa3455e96d591',
           },
         });
 
@@ -302,44 +302,71 @@ const ProductDetails = () => {
           </div>
           <hr />
           <div className="quantity mt-5 flex flex-wrap">
-        {isProductInCart ? (
-          <>
-            <div className="add">
-              <button onClick={() => handlePostCartWithQuantity(id, quantity)} disabled={quantity <= 0 || quantity > maxStock}>
-                {isProductInCart ? 'Убрать из корзины' : 'Добавить в корзину'}
-              </button>
-            </div>
-            <div className="heartt">
-              <button className={`text-black text-3xl py-3 px-4 ${isProductInFavorite ? 'filled' : ''}`} onClick={() => handlePostFavorite(products.id)}>
-                {isProductInFavorite ? <BsHeartFill /> : <BsHeart />}
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-          
-            <div className="colich flex">
-              <button className="px-[16px] text-2xl mr-5" onClick={handleDecrement}>
-                -
-              </button>
-              <p className="text-2xl">{quantity}</p>
-              <button className="px-[16px] text-2xl ml-5" onClick={handleIncrement}>
-                +
-              </button>
-            </div>
-            <div className="add">
-              <button onClick={() => handlePostCartWithQuantity(id, quantity)} disabled={quantity <= 0 || quantity > maxStock}>
-                {isProductInCart ? 'Убрать из корзины' : 'Добавить в корзину'}
-              </button>
-            </div>
-            <div className="heartt">
-              <button className={`text-black text-3xl py-3 px-4 ${isProductInFavorite ? 'filled' : ''}`} onClick={() => handlePostFavorite(products.id)}>
-                {isProductInFavorite ? <BsHeartFill /> : <BsHeart />}
-              </button>
-            </div>
+            {data ? (
+              <>
+ {isProductInCart ? (
+  <>
+    <div className="add">
+      <button onClick={() => handlePostCartWithQuantity(id, quantity)} disabled={quantity <= 0 || quantity > maxStock}>
+        {isProductInCart ? 'Убрать из корзины' : 'Добавить в корзину'}
+      </button>
+    </div>
+    <div className="heartt">
+      <button className={`text-black text-3xl py-3 px-4 ${isProductInFavorite ? 'filled' : ''}`} onClick={() => handlePostFavorite(products.id)}>
+        {isProductInFavorite ? <BsHeartFill /> : <BsHeart />}
+      </button>
+    </div>
+  </>
+) : (
+  <>
+  
+    <div className="colich flex">
+      <button className="px-[16px] text-2xl mr-5" onClick={handleDecrement}>
+        -
+      </button>
+      <p className="text-2xl">{quantity}</p>
+      <button className="px-[16px] text-2xl ml-5" onClick={handleIncrement}>
+        +
+      </button>
+    </div>
+    <div className="add">
+      <button onClick={() => handlePostCartWithQuantity(id, quantity)} disabled={quantity <= 0 || quantity > maxStock}>
+        {isProductInCart ? 'Убрать из корзины' : 'Добавить в корзину'}
+      </button>
+    </div>
+    <div className="heartt">
+      <button className={`text-black text-3xl py-3 px-4 ${isProductInFavorite ? 'filled' : ''}`} onClick={() => handlePostFavorite(products.id)}>
+        {isProductInFavorite ? <BsHeartFill /> : <BsHeart />}
+      </button>
+    </div>
 
+  </>
+)}
+</>
+            ):
+            <>
+            <div className="colich flex">
+            <button className="px-[16px] text-2xl mr-5" onClick={handleDecrement}>
+              -
+            </button>
+            <p className="text-2xl">{quantity}</p>
+            <button className="px-[16px] text-2xl ml-5" onClick={handleIncrement}>
+              +
+            </button>
+          </div>
+          <div className="add">
+            <button onClick={() => navigate('/login')}>
+              {isProductInCart ? 'Убрать из корзины' : 'Добавить в корзину'}
+            </button>
+          </div>
+          <div className="heartt">
+            <button className={`text-black text-3xl py-3 px-4 ${isProductInFavorite ? 'filled' : ''}`} onClick={() => navigate('/login')}>
+              {isProductInFavorite ? <BsHeartFill /> : <BsHeart />}
+            </button>
+          </div>
           </>
-        )}
+            }
+       
       </div>
 
 
@@ -359,9 +386,7 @@ const ProductDetails = () => {
               (products.id!=id ? 
           <div key={products.id} className="max-w-sm cart col-xl-3 col-lg-4 col-md-6 col-sm-12 rounded-lg overflow-hidden">
             <Link to={`/products/${products.attributes.slug}/${products.id}`}>
-              <button className="px-2 py-1 relative heart text-center float-right top-[30px] right-[30px] text-white rounded">
-                <FaHeart className="inline-block mr-1 text-2xl text-gray-300" />
-              </button>
+
               <img
                 src={`${products.attributes.image.data.attributes.url}`}
                 alt={products.attributes.name}
@@ -375,9 +400,7 @@ const ProductDetails = () => {
               <div className="flex">{calculateDisplayPrice(products)}</div>
 
               <div className="mt-2">
-                <button className="px-4 py-2 bg-[#556638] text-white rounded mr-2" onClick={handlePostCartWithQuantity}>
-                  <FaShoppingCart className="inline-block mr-1" /> Добавить в корзину
-                </button>
+
               </div>
             </div>
           </div>
