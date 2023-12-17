@@ -77,3 +77,39 @@ margin-left: 20px;
 font-weight: 500;
 line-height: normal;
 }
+
+@media(max-width:767px){
+    
+}
+
+@media(max-width:515px){
+   
+    .colich button{
+    
+padding: auto;
+justify-content: space-between;
+align-items: center;
+flex-shrink: 0;
+border-radius: 62px;
+
+
+
+}
+.add{
+    color: #FFF;
+    background-color: #000;
+    padding: auto;
+    border-radius: 54px;
+    font-size: 16px;
+    font-style: normal;
+    margin-left: 20px;
+    font-weight: 500;
+    line-height: normal;
+   
+}
+.colich{
+    margin-left: 20px;
+    margin-bottom: 30px;
+}
+
+}

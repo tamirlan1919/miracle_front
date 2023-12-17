@@ -53,21 +53,25 @@
     height: 50px;
     width: 100%;
     z-index: 999;
-    background-color: white;
     position:fixed;
-
+    align-self: flex-start;
     bottom: 5px;
     left: 0px;
-    
     right: 0px;
     padding-left: 0px;
-    justify-content: space-around;
+    justify-content: space-between;
+  }
+  .user{
+    margin-right: 0;
+    padding-right: 0px;
   }
   .wrap{
-    padding: 5px;
+    align-self: center;
+    background-color: white;
+    padding: 0px;
    float: none;
    width: 100%;
-   justify-content: space-around;
+   justify-content: space-between;
 
    
   }
@@ -113,4 +117,10 @@
 }
 .net{
   display: none;
+}
+
+@media(max-width:767px){
+  .wrap p{
+    left: -5px;
+  }
 }

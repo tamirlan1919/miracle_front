@@ -12,7 +12,7 @@ import styles from './ProductCard.scss'
 const ProductCard = () => {
   const { products, status } = useSelector((state) => state.products);
   const { data } = useSelector((state) => state.auth);
-
+ 
   const dispatch = useDispatch();
 
   useEffect(() => {

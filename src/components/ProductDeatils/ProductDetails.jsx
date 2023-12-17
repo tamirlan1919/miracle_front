@@ -7,7 +7,7 @@ import { FaShoppingCart, FaHeart } from 'react-icons/fa';
 import { getProductId} from '../../redux/slice/productSlice';
 import { authMe, postProductInCart, postProductInFavorite } from "../../redux/slice/authSlice";
 import axios, { all } from 'axios';
-import styles from './ProductDeatils.css'; // Ensure the correct path
+import  './ProductDeatils.css'; // Ensure the correct path
 import ProductDetailsInfo from './ProductDetailsInfo';
 import ProductDetailsInfoDouble from './ProductDetailsInfoDouble';
 
@@ -301,7 +301,7 @@ const ProductDetails = () => {
             <p>ID {products.attributes?.sclad_id}</p>
           </div>
           <hr />
-          <div className="quantity mt-5 flex">
+          <div className="quantity mt-5 flex flex-wrap">
         {isProductInCart ? (
           <>
             <div className="add">
@@ -317,6 +317,7 @@ const ProductDetails = () => {
           </>
         ) : (
           <>
+          
             <div className="colich flex">
               <button className="px-[16px] text-2xl mr-5" onClick={handleDecrement}>
                 -
