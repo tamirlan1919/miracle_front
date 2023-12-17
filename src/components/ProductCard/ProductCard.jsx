@@ -68,7 +68,7 @@ const ProductCard = () => {
     }, 3000);
   };
 
-
+  console.log(products)
   const handleToggleFavorite = (productId) => {
     const existingFavorites = Array.isArray(data?.favorite) ? data.favorite : [];
 
@@ -143,7 +143,7 @@ const ProductCard = () => {
 
             <Link to={`http://127.0.0.1:3000/products/${product.attributes?.slug}/${product?.id}`}>
               <img
-                src={`${process.env.REACT_APP_UPLOAD_URL + product.attributes?.image.data.attributes.url}`}
+                src={`${product.attributes?.image.data.attributes.url}`}
                 alt={product.attributes?.name}
                 className="w-full max-h-[170px] object-contain object-center"
               />

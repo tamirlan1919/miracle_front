@@ -35,7 +35,7 @@ console.log(process.env.REACT_APP_API_URL+product.attributes.image.data.attribut
             <FaHeart className="inline-block mr-1 text-2xl text-gray-300" />
           </button>
         <img
-        src={`${process.env.REACT_APP_UPLOAD_URL+product.attributes.image.data.attributes.url}`}
+        src={`${product.attributes.image.data.attributes.url}`}
 
         alt={product.attributes.name}
         className="w-full max-h-[170px] object-contain object-center"

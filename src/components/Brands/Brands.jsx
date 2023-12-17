@@ -31,7 +31,7 @@ const Brands = () => {
   <div key={brand.id} className="col-xl-4 col-lg-3 col-md-6 col-sm-12 justify-around mb-8">
 <Link to = {`/categories/${brand.attributes?.slug}`}>
 
-      <img src={process.env.REACT_APP_UPLOAD_URL + brand.attributes?.image.data.attributes.url}  className='rounded-[20px] max-h-[500px]' />
+      <img src={brand.attributes?.image.data.attributes.url}  className='rounded-[20px] max-h-[500px]' />
       <p className='text-2xl mt-3'>{brand.attributes?.name}</p>
       </Link>
 

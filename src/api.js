@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://wonderful-passion-8038f75266.media.strapiapp.com/api",
+  baseURL: "https://wonderful-passion-8038f75266.strapiapp.com/api",
   headers: {
     Authorization:
       "Bearer " +

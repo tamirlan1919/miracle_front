@@ -253,7 +253,7 @@ const ProductDetails = () => {
                 products.attributes?.image2.data.map((image, index) => (
                   <img
                     key={index}
-                    src={`${process.env.REACT_APP_UPLOAD_URL + image.attributes?.url}`}
+                    src={`${image.attributes?.url}`}
                     width={'150px'}
                     alt={`Product ${index}`}
                     className="thumbnail mb-2 rounded-lg"
@@ -357,12 +357,12 @@ const ProductDetails = () => {
           {all_products.map((products) => (
               (products.id!=id ? 
           <div key={products.id} className="max-w-sm cart col-xl-3 col-lg-4 col-md-6 col-sm-12 rounded-lg overflow-hidden">
-            <Link to={`http://127.0.0.1:3000/products/${products.attributes.slug}/${products.id}`}>
+            <Link to={`/products/${products.attributes.slug}/${products.id}`}>
               <button className="px-2 py-1 relative heart text-center float-right top-[30px] right-[30px] text-white rounded">
                 <FaHeart className="inline-block mr-1 text-2xl text-gray-300" />
               </button>
               <img
-                src={`${process.env.REACT_APP_UPLOAD_URL+products.attributes.image.data.attributes.url}`}
+                src={`${products.attributes.image.data.attributes.url}`}
                 alt={products.attributes.name}
                 className="w-full max-h-[170px] object-contain object-center"
               />
