@@ -121,7 +121,7 @@ const ProductCard = () => {
 
 
   return (
-    <div className='container'>
+    <div className='container mb-10'>
       <div className="row">
         {products?.map((product) => (
           <div key={product?.id} className="max-w-sm cart col-xl-3 col-lg-4 col-md-6 col-sm-12 rounded-lg overflow-hidden wrap">

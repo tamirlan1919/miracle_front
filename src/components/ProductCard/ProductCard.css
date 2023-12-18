@@ -36,6 +36,9 @@
     background-color: gray;
     opacity: 1;
 }
+.basket:hover{
+    background: black;
+}
 .bask{
 
 }

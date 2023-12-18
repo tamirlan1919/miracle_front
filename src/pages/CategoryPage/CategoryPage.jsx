@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import ProductCategoryCard from '../../components/ProductCategoryCard/ProductCategoryCard';
 import { useParams } from 'react-router-dom';
 import { getProducts } from '../../redux/slice/productSlice';
+import ProductCategoryCard from '../../components/ProductCategoryCard/ProductCategoryCard';
 
 const CategoryPage = () => {
   const { categorySlug } = useParams();
@@ -20,6 +19,50 @@ const CategoryPage = () => {
   const [sortDirection, setSortDirection] = useState('asc');
   const [isFilterApplied, setIsFilterApplied] = useState(false);
 
+  const applyFilters = () => {
+    let filteredProducts = [...originalProducts];
+
+    // Apply filters based on Redux state
+    if (filters.name) {
+      filteredProducts = filteredProducts.filter((product) =>
+        product.attributes.name.toLowerCase().includes(filters.name.toLowerCase())
+      );
+    }
+    if (filters.minPrice) {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.attributes.price >= parseFloat(filters.minPrice)
+      );
+    }
+    if (filters.maxPrice) {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.attributes.price <= parseFloat(filters.maxPrice)
+      );
+    }
+
+    // Apply sorting based on Redux state
+    switch (sortType) {
+      case 'name':
+        filteredProducts.sort((a, b) => a.attributes.name.localeCompare(b.attributes.name));
+        break;
+      case 'price':
+        filteredProducts.sort((a, b) => a.attributes.price - b.attributes.price);
+        break;
+      case 'date':
+        filteredProducts.sort((a, b) => new Date(b.attributes.created_at) - new Date(a.attributes.created_at));
+        break;
+      default:
+        break;
+    }
+
+    // Apply sorting order
+    if (sortDirection === 'desc') {
+      filteredProducts.reverse();
+    }
+
+    // Set the filtered and sorted products in the component state
+    setProducts(filteredProducts);
+  };
+
   useEffect(() => {
     // Dispatch the getProducts action to fetch products when the component mounts
     dispatch(getProducts());
@@ -29,21 +72,12 @@ const CategoryPage = () => {
     setProducts(originalProducts);
   }, [originalProducts]);
 
-
   useEffect(() => {
-    if (originalProducts) {
-      // Filter products based on the category slug from the URL
-      const filteredProducts = originalProducts.filter(
-        (product) => product.attributes.category?.data.attributes.slug === categorySlug
-      );
-      setProducts(filteredProducts);
+    if (isFilterApplied) {
+      applyFilters();
+      setIsFilterApplied(false);
     }
-  }, [originalProducts, categorySlug]);
-
-  const applyFilters = () => {
-    // Implement your filter logic here based on the Redux state
-    setIsFilterApplied(true);
-  };
+  }, [isFilterApplied, applyFilters]);
 
   const handleFilterChange = (filterName, value) => {
     setFilters({
@@ -57,21 +91,13 @@ const CategoryPage = () => {
     setSortDirection((prevDirection) => (type === sortType ? (prevDirection === 'asc' ? 'desc' : 'asc') : 'asc'));
   };
 
-  const sortedProducts = useMemo(() => {
-    // Implement your sorting logic here based on the Redux state
-
-    return [...products]; // Placeholder, replace with actual sorting logic
-  }, [products]);
-
-  useEffect(() => {
-    if (isFilterApplied) {
-      applyFilters();
-      setIsFilterApplied(false);
-    }
-  }, [filters, isFilterApplied]);
-
   const resetFilters = () => {
-    // Implement your reset logic here based on the Redux state
+    setFilters({
+      name: '',
+      minPrice: '',
+      maxPrice: '',
+    });
+    setIsFilterApplied(true);
   };
 
   if (status === 'loading') {
@@ -84,22 +110,21 @@ const CategoryPage = () => {
 
       <div className="row">
         <div className="col-md-3">
-          <h2 className='mb-3'>Фильтры</h2>
-          <label className='mb-2'>
-            
+          <h2 className="mb-3">Фильтры</h2>
+          <label className="mb-2">
             <input
               type="text"
               className="form-control"
               value={filters.name}
-              placeholder='Бренд'
+              placeholder="Бренд"
               onChange={(e) => handleFilterChange('name', e.target.value)}
             />
           </label>
           <br />
-          <label className='mb-2'>
+          <label className="mb-2">
             <input
               type="number"
-              placeholder='Мин цена'
+              placeholder="Мин цена"
               className="form-control"
               value={filters.minPrice}
               onChange={(e) => handleFilterChange('minPrice', e.target.value)}
@@ -107,24 +132,22 @@ const CategoryPage = () => {
           </label>
           <br />
           <label>
-            
             <input
               type="number"
-
-              placeholder='Макс цена'
+              placeholder="Макс цена"
               className="form-control"
               value={filters.maxPrice}
               onChange={(e) => handleFilterChange('maxPrice', e.target.value)}
             />
           </label>
           <br />
-          <div className='mt-3'>
-          <button className="btn bg-[#028103] text-white" onClick={applyFilters}>
-            Применить
-          </button>
-          <button className="btn ml-2 text-white bg-[black]" onClick={resetFilters}>
-            Сбросить
-          </button>
+          <div className="mt-2">
+            <button className="btn bg-[#028103] text-white" onClick={applyFilters}>
+              Применить
+            </button>
+            <button className="btn ml-2 text-white bg-[black]" onClick={resetFilters}>
+              Сбросить
+            </button>
           </div>
         </div>
 
@@ -188,8 +211,8 @@ const CategoryPage = () => {
           </div>
 
           <div className="row">
-            {sortedProducts.map((product) => (
-              <div key={product.id} className="col-md-6 col-lg-4 mb-3">
+            {products.map((product) => (
+              <div key={product.id} className="col-md-4 mb-3">
                 <ProductCategoryCard product={product} />
               </div>
             ))}

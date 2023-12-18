@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from '../../api.js';
 import { useNavigate } from 'react-router-dom';
 import { TextField } from '@mui/material';
@@ -6,7 +6,9 @@ import { TextField } from '@mui/material';
 const SearchComponent = () => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
+  const suggestionsRef = useRef(null);
 
   useEffect(() => {
     const fetchSuggestions = async () => {
@@ -14,6 +16,7 @@ const SearchComponent = () => {
         const response = await axios.get(`/products?filters[slug][$contains]=${query}&populate=*`);
         console.log(response.data.data);
         setSuggestions(response.data.data);
+        setShowSuggestions(true); // Show suggestions when there are results
       } catch (error) {
         console.error('Error fetching search suggestions:', error);
       }
@@ -23,23 +26,38 @@ const SearchComponent = () => {
       fetchSuggestions();
     } else {
       setSuggestions([]);
+      setShowSuggestions(false); // Hide suggestions when the query is empty
     }
   }, [query]);
 
   const handleSelect = (slug, productId) => {
     navigate(`/products/${slug}/${productId}`);
     setQuery('');
+    setShowSuggestions(false); // Hide suggestions after selecting an item
   };
 
   const handleSearch = () => {
-    // Perform any additional search-related actions if needed
-    // For now, just navigate to the search results page
     navigate(`/search-results/${query}`);
     setQuery('');
+    setShowSuggestions(false); // Hide suggestions after performing a search
   };
 
+  const handleClickOutside = (event) => {
+    if (suggestionsRef.current && !suggestionsRef.current.contains(event.target)) {
+      setShowSuggestions(false); // Hide suggestions when clicking outside the component
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative' }} ref={suggestionsRef}>
       <TextField
         value={query}
         onChange={(e) => setQuery(e.target.value)}
@@ -58,22 +76,24 @@ const SearchComponent = () => {
         </button>
       )}
 
-      <ul className="absolute overflow-y-scroll bg-white z-1 left-0 right-0 rounded-md">
-        {suggestions.map((suggestion) => (
-          <li
-            key={suggestion.id}
-            className="pt-2 px-3 mb-2 flex items-center cursor-pointer"
-            onClick={() => handleSelect(suggestion.attributes.slug, suggestion.id)}
-          >
-            <img
-              src={`${suggestion.attributes?.image.data.attributes.url}`}
-              alt={suggestion.attributes.name}
-              className="w-9 h-12 mr-2"
-            />
-            {suggestion.attributes.name}
-          </li>
-        ))}
-      </ul>
+      {showSuggestions && (
+        <ul className="absolute overflow-y-scroll max-h-20 bg-white z-1 left-0 right-0 rounded-md">
+          {suggestions.map((suggestion) => (
+            <li
+              key={suggestion.id}
+              className="pt-2 px-3 mb-2 flex items-center cursor-pointer"
+              onClick={() => handleSelect(suggestion.attributes.slug, suggestion.id)}
+            >
+              <img
+                src={`${suggestion.attributes?.image.data.attributes.url}`}
+                alt={suggestion.attributes.name}
+                className="w-9 h-12 mr-2"
+              />
+              {suggestion.attributes.name}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

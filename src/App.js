@@ -51,7 +51,7 @@ function App() {
       <Route path="/search-results/:query" element={<SearchResults/>} />
       <Route path="categories/:categorySlug" element={<CategoryPage/>} />
       <Route path="brands/:slug" element={<BrandProducts/>} />
-      <Route element={<NotPage/>} />
+      <Route path='*' element={<NotPage/>} />
 
     </Routes>
     <FooterComp/>

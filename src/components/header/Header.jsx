@@ -141,7 +141,7 @@ const Header = () => {
             <BsList />
             </button>}
           </div>
-              <div className="user">
+              <div className="userr">
                 
               {data ? (
               // Если данные о пользователе есть, выводим его имя
