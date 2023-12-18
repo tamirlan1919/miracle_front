@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authMe, postProductInCart, postProductInFavorite, deleteProductInCart } from "../../redux/slice/authSlice";
 import { getProducts } from "../../redux/slice/productSlice";
@@ -9,12 +9,24 @@ import styles from './cart.module.scss'
 import image from './free-icon-perfume-1271436.png';
 import { useNavigate } from "react-router-dom";
 import { userData } from "../../helper";
+import { IoIosClose } from "react-icons/io";
+import { CButton, COffcanvas, COffcanvasHeader, COffcanvasTitle, CCloseButton, COffcanvasBody } from '@coreui/react';
+import CheckoutForm from "../CheckoutForm/CheckoutForm";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const { data, status } = useSelector((state) => state.auth);
   const { products } = useSelector((state) => state.products);
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const {jwt} = userData()
   React.useEffect(() => {
     dispatch(authMe());
@@ -171,7 +183,7 @@ const Cart = () => {
                 <div className="mb-1">Доставка: БЕСПЛАТНО</div>
                 <hr />
                 <div className="fw-bold">ИТОГО: {Math.floor(totalPrice)} ₽</div>
-                <button className="bg-black text-white px-5 py-1  mt-3 hover:bg-gray-500">
+                <button className="bg-black text-white px-5 py-1  mt-3 hover:bg-gray-500" onClick={openModal}>
                   ПРОДОЛЖИТЬ ОФОРМЛЕНИЕ ЗАКАЗА
                 </button>
               </div>
@@ -195,7 +207,25 @@ const Cart = () => {
         </div>
       </div>
       )}
+
+<COffcanvas placement="end" className= 'text-black' scroll={true} visible={isModalOpen} onHide={closeModal}>
+        <COffcanvasHeader>
+          <COffcanvasTitle>Miracle</COffcanvasTitle>
+          
+          <button className='text-3xl' onClick={closeModal}>
+            <IoIosClose/>
+          </button>
+        </COffcanvasHeader>
+        <COffcanvasBody>
+        <CheckoutForm totalPrice={Math.floor(totalPrice)} />
+
+        </COffcanvasBody>
+      </COffcanvas>
     </div>
+
+
+
+
   );
 };
 

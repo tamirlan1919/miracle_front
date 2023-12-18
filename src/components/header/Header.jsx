@@ -10,6 +10,7 @@ import SearchComponent from '../SearchComponent/SearchComponent';
 import { getCategories } from '../../redux/slice/catalogSlice';
 import { authMe } from '../../redux/slice/authSlice'; 
 import { MdHome } from "react-icons/md";
+import { FiBox } from "react-icons/fi";
 
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
@@ -40,7 +41,7 @@ const Header = () => {
     dispatch(getCategories());
     const handleScroll = () => {
       // Проверка, находится ли пользователь в верхней части страницы
-      setIsAtTop(window.scrollY >= 200);
+      setIsAtTop(window.scrollY >= 1);
     };
 
     // Добавление слушателя события прокрутки
@@ -84,7 +85,7 @@ const Header = () => {
           <div className="imgs  col-xl-2 mr-[50px] col-lg-2">
             <a href="/" className='miracle'><img className='miracle_img w-full' src={img} alt="" /></a>
           </div>
-          <div className={`col-xl-2 col-lg-1 col-md-1 col-sm-1  py-2 rounded-lg max-w-[148px] self-center  flex max-h-[42px]  mr-7  text-[12px]   catalog ${isModalOpen ? 'bg-[#E8E8E8] text-[black]' : 'bg-[#028103] text-white' }`} onClick={openModal}>
+          <div className={`col-xl-1 col-lg-1 col-md-1 col-sm-1  py-2 rounded-lg max-w-[148px] self-center  flex max-h-[42px]  mr-7  text-[12px]   catalog ${isModalOpen ? 'bg-[#E8E8E8] text-[black]' : 'bg-[#028103] text-white' }`} onClick={openModal}>
             {isModalOpen ?
             <button className='bs text-3xl'>
               
@@ -99,16 +100,16 @@ const Header = () => {
           <div className="poisk  col-xl-5 col-lg-6 col-md-12 col-sm-12  self-center block ">
             <SearchComponent />
           </div>
-          <div className='col-xl-2 users col-lg-2 col-md-12 col-sm-12 pl-10 py-1 self-center text-3xl'>
+          <div className='col-xl-3 users col-lg-2 col-md-12 col-sm-12 pl-10 py-1 self-center text-3xl'>
             <div className="wrap flex">
               <div className="home">
               <a href="/">
-                <button className=' btns '><MdHome/> </button>
+                <button className=' btns mr-4'><MdHome/> </button>
               </a>
               </div>
               <div className="favorite">
             <a href="/favorites">
-                <button className=' btns '><AiOutlineHeart /></button>
+                <button className=' btns mr-4'><AiOutlineHeart /></button>
               </a>
               </div>
               <div className="cartt max-w-[46px]">
@@ -119,10 +120,10 @@ const Header = () => {
                       <p className='relative top-[20px] right-[-14px] font-bold text-[#028103] text-[15px]'>
                         {data.cart.length}
                       </p>
-                      <button className='btns text-4xl relative top-[-20px]'><AiOutlineShopping /></button>
+                      <button className='btns text-4xl relative top-[-20px] mr-4'><AiOutlineShopping /></button>
                     </>
                   ) : (
-                    <button className='btns text-4xl'><AiOutlineShopping /></button>
+                    <button className='btns text-4xl mr-4'><AiOutlineShopping /></button>
                   )}
 
                   </div>
@@ -141,21 +142,31 @@ const Header = () => {
             <BsList />
             </button>}
           </div>
+          <div className='order'>
+            {data ?(
+                              <Link to={'/orders'}>
+                              <button className='mr-4'><FiBox/></button>
+                            </Link>
+
+            ):''}
+          </div>
               <div className="userr">
                 
               {data ? (
               // Если данные о пользователе есть, выводим его имя
               (
-                
+                <>
+
                 <a href='/profile'>
                 <button >
                   {avatar ? (
-                    <img src={avatar} alt="User Avatar" className="rounded-full h-8 w-8 mr-2" />
+                    <img src={avatar} alt="User Avatar" className="rounded-full h-8 w-8 mr-4" />
                   ) : (
                     <AiOutlineUser />
                   )}
                 </button>
               </a>
+              </>
               )
             ) : (
               
