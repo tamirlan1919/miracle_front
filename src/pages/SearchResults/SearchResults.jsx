@@ -19,7 +19,7 @@ const SearchResults = () => {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const productResponse = await axios.get(`/products?filters[slug][$contains]=${query}&populate=*`);
+        const productResponse = await axios.get(`/products?filters[slug][$contains]=${query.toLowerCase()}&populate=*`);
         const brandResponse = await axios.get(`/brands?filters[name][$contains]=${query.toLowerCase()}&populate=*`);
 
         // Combine product and brand data into a single array
@@ -297,9 +297,9 @@ const SearchResults = () => {
           </div>
 
           <div className="row">
-            {products.map((result) => (
-              <div key={result.id} className="col-xl-4 col-md-6 col-lg-4 col-sm-12 mb-3">
-                <ProductCategoryCard product={result} />
+            {products.map((product) => (
+              <div key={product.id} className="col-xl-4 col-md-6 col-lg-4 col-sm-12 mb-3">
+                <ProductCategoryCard product={product} />
               </div>
             ))}
           </div>
