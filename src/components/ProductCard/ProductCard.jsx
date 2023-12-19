@@ -9,11 +9,15 @@ import { AiOutlineShopping } from 'react-icons/ai';
 import { MdCheckCircle,MdClose } from 'react-icons/md';
 import { authMe, postProductInCart, postProductInFavorite } from '../../redux/slice/authSlice';
 import styles from './ProductCard.scss'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const ProductCard = () => {
   const { products, status } = useSelector((state) => state.products);
   const { data } = useSelector((state) => state.auth);
   const navigate = useNavigate()
   const dispatch = useDispatch();
+  const [isOrderPlaced, setIsOrderPlaced] = useState(false);
 
   useEffect(() => {
     dispatch(authMe());
@@ -51,6 +55,11 @@ const ProductCard = () => {
       };
 
       dispatch(postProductInCart(field));
+      toast.error('Товар удален из корзины', {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      setIsOrderPlaced(true);
+
     } else {
       // Add the product to the cart
       const field = {
@@ -58,6 +67,14 @@ const ProductCard = () => {
       };
 
       dispatch(postProductInCart(field));
+
+      toast.success(`Товар  успешно добавлен в корзину!`, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+  
+      // Trigger the callback function provided by the parent component
+      setIsOrderPlaced(true);
+
     }
 
 
@@ -211,6 +228,12 @@ const ProductCard = () => {
           </div>
         ))}
       </div>
+      {isOrderPlaced && (
+        <>
+        <ToastContainer autoClose={3000} hideProgressBar />
+        
+        </>
+      )}
     </div>
   );
 };

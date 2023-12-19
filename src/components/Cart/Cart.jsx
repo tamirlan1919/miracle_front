@@ -12,6 +12,8 @@ import { userData } from "../../helper";
 import { IoIosClose } from "react-icons/io";
 import { CButton, COffcanvas, COffcanvasHeader, COffcanvasTitle, CCloseButton, COffcanvasBody } from '@coreui/react';
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -22,6 +24,7 @@ const Cart = () => {
   const openModal = () => {
     setIsModalOpen(true);
   };
+  const [isOrderPlaced, setIsOrderPlaced] = useState(false);
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -49,6 +52,12 @@ const Cart = () => {
       cart: [],
     };
     dispatch(postProductInCart(field));
+    toast.success('Заказ успешно оформлен!', {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+
+    // Trigger the callback function provided by the parent component
+    setIsOrderPlaced(true);
   };
 
   const cart =
@@ -234,6 +243,12 @@ const Cart = () => {
           <CheckoutForm totalPrice={Math.floor(totalPrice)} onOrderSuccess={handleOrderSuccess} />
         </COffcanvasBody>
       </COffcanvas>
+      {isOrderPlaced && (
+        <>
+        <ToastContainer autoClose={3000} hideProgressBar />
+        
+        </>
+      )}
     </div>
 
 

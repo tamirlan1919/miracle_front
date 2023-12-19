@@ -142,7 +142,7 @@ const Header = () => {
             <BsList />
             </button>}
           </div>
-          <div className='order'>
+          <div className={`order  `}>
             {data ?(
                               <Link to={'/orders'}>
                               <button className='mr-4'><FiBox/></button>

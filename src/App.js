@@ -24,6 +24,7 @@ import Logout from './components/Logout';
 import Profile from './pages/Profile/Profile';
 import AllCategory from './pages/AllCategory/AllCategory';
 import SearchResults from './pages/SearchResults/SearchResults';
+import Orders from './pages/Orders/Orders';
 
 function App() {
 
@@ -51,6 +52,8 @@ function App() {
       <Route path="/search-results/:query" element={<SearchResults/>} />
       <Route path="categories/:categorySlug" element={<CategoryPage/>} />
       <Route path="brands/:slug" element={<BrandProducts/>} />
+      <Route path="orders" element={<Orders/>} />
+      
       <Route path='*' element={<NotPage/>} />
 
     </Routes>

@@ -41,11 +41,8 @@ const CheckoutForm = ({ totalPrice,onOrderSuccess }) => {
       // You can dispatch an action to post the order with the form data and total price
 
       // For demonstration purposes, let's assume the order is successfully placed
-      toast.success('Заказ успешно оформлен!', {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-      setIsOrderPlaced(true);
 
+      onOrderSuccess();
       // Trigger the callback function provided by the parent component
    
 
@@ -170,12 +167,7 @@ const CheckoutForm = ({ totalPrice,onOrderSuccess }) => {
           Завершить заказ
         </button>
       </form>
-      {isOrderPlaced && (
-        <>
-        <ToastContainer autoClose={3000} hideProgressBar />
-        
-        </>
-      )}
+
     </div>
   );
 };

@@ -127,6 +127,38 @@ export const updateProfile = createAsyncThunk("/updateProfile", async (formData)
   }
 });
 
+export const fetchOrders = createAsyncThunk("/orders", async () => {
+  try {
+    const { data } = await axios.get(`/orders/`);
+    console.log(data)
+    return data;
+  } catch (error) {
+    console.warn(error);
+    throw error;
+  }
+});
+
+export const createOrder = createAsyncThunk("/orders/create", async (orderData) => {
+  try {
+    const { data } = await axios.post("/orders", orderData);
+    return data;
+  } catch (error) {
+    console.warn(error);
+    throw error;
+  }
+});
+
+export const deleteOrder = createAsyncThunk("/orders/delete", async (orderId) => {
+  try {
+    const { data } = await axios.delete(`/orders/${orderId}`);
+    return data;
+  } catch (error) {
+    console.warn(error);
+    throw error;
+  }
+});
+
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -186,7 +218,23 @@ const authSlice = createSlice({
 
       .addCase(postProductInFavorite.fulfilled, (state, action) => {
         state.data.favorite = action.payload;
-      });
+      })
+      .addCase(fetchOrders.pending, (state) => {
+        state.orders = [];
+      })
+      .addCase(fetchOrders.fulfilled, (state, action) => {
+        state.orders = action.payload;
+      })
+      .addCase(fetchOrders.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+
+      .addCase(createOrder.fulfilled, (state, action) => {
+        state.orders.push(action.payload);
+      })
+      .addCase(createOrder.rejected, (state, action) => {
+        state.error = action.payload;
+      })
   },
 });
 
