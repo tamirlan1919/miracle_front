@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const CheckoutForm = ({ totalPrice }) => {
+
+const CheckoutForm = ({ totalPrice,onOrderSuccess }) => {
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({
       phoneNumber: '',
@@ -27,18 +30,38 @@ const CheckoutForm = ({ totalPrice }) => {
       paymentMethod: value,
     }));
   };
-  const handleSubmit = (e) => {
+
+  const [isOrderPlaced, setIsOrderPlaced] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate form data before submitting
-    // ...
+    try {
+      // Simulate submitting the order
+      // You can dispatch an action to post the order with the form data and total price
 
-    // Dispatch an action to post the order with the form data and total price
+      // For demonstration purposes, let's assume the order is successfully placed
+      toast.success('Заказ успешно оформлен!', {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      setIsOrderPlaced(true);
+
+      // Trigger the callback function provided by the parent component
+   
+
+      // You can reset the form or navigate to a confirmation page if needed
+    } catch (error) {
+      console.error('Error placing order:', error);
+      toast.error('Произошла ошибка при оформлении заказа', {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
   };
+
 
   return (
     <div>
-      <h2>Оформление заказа</h2>
+      <h2 className='mb-5'>Оформление заказа</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="phoneNumber" className="form-label">
@@ -142,10 +165,17 @@ const CheckoutForm = ({ totalPrice }) => {
           </div>
           {/* You can add more payment methods here */}
         </div>
-        <button type="submit" className="btn btn-primary">
+        <h1 className='text-2xl text-left mt-5 '>Итого: {totalPrice} ₽</h1>
+        <button type="submit" className="hover:bg-gray-500 bg-black rounded-lg text-white px-10 py-3  ">
           Завершить заказ
         </button>
       </form>
+      {isOrderPlaced && (
+        <>
+        <ToastContainer autoClose={3000} hideProgressBar />
+        
+        </>
+      )}
     </div>
   );
 };

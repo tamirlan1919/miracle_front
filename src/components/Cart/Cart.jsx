@@ -41,13 +41,22 @@ const Cart = () => {
     );
   }
 
+  const handleOrderSuccess = () => {
+    setIsModalOpen(false);
+
+    // Clear the cart (dispatch an action to update the cart state)
+    const field = {
+      cart: [],
+    };
+    dispatch(postProductInCart(field));
+  };
+
   const cart =
     Array.isArray(products) &&
     products?.filter((product) =>
       data?.cart?.some((cartItem) => Object.keys(cartItem)[0] === String(product.id))
     );
 
-    console.log(data)
   const totalPrice =
     Array.isArray(cart) &&
     cart?.reduce(function (sum, current) {
@@ -208,17 +217,21 @@ const Cart = () => {
       </div>
       )}
 
-<COffcanvas placement="end" className= 'text-black' scroll={true} visible={isModalOpen} onHide={closeModal}>
+<COffcanvas
+        placement="end"
+        className="text-black"
+        scroll={true}
+        visible={isModalOpen}
+        onHide={() => setIsModalOpen(false)}
+      >
         <COffcanvasHeader>
           <COffcanvasTitle>Miracle</COffcanvasTitle>
-          
-          <button className='text-3xl' onClick={closeModal}>
-            <IoIosClose/>
+          <button className="text-3xl" onClick={() => setIsModalOpen(false)}>
+            <IoIosClose />
           </button>
         </COffcanvasHeader>
         <COffcanvasBody>
-        <CheckoutForm totalPrice={Math.floor(totalPrice)} />
-
+          <CheckoutForm totalPrice={Math.floor(totalPrice)} onOrderSuccess={handleOrderSuccess} />
         </COffcanvasBody>
       </COffcanvas>
     </div>

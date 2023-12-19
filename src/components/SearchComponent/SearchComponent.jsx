@@ -14,7 +14,6 @@ const SearchComponent = () => {
     const fetchSuggestions = async () => {
       try {
         const response = await axios.get(`/products?filters[slug][$contains]=${query}&populate=*`);
-        console.log(response.data.data);
         setSuggestions(response.data.data);
         setShowSuggestions(true); // Show suggestions when there are results
       } catch (error) {

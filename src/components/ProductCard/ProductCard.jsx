@@ -68,7 +68,6 @@ const ProductCard = () => {
     }, 3000);
   };
 
-  console.log(products)
   const handleToggleFavorite = (productId) => {
     const existingFavorites = Array.isArray(data?.favorite) ? data.favorite : [];
 
