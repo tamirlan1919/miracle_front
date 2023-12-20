@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 const ProductCategoryCard = ({ product }) => {
+  
   const [addedProduct, setAddedProduct] = useState(null);
   const { data } = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -80,7 +81,7 @@ const ProductCategoryCard = ({ product }) => {
       </div>
     );
   }
-  
+
   const calculateDisplayPrice = (product) => {
     if (isNewPrice(product)) {
       return (

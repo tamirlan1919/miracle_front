@@ -20,10 +20,9 @@ const SearchResults = () => {
     const fetchResults = async () => {
       try {
         const productResponse = await axios.get(`/products?filters[slug][$contains]=${query.toLowerCase()}&populate=*`);
-        const brandResponse = await axios.get(`/brands?filters[name][$contains]=${query.toLowerCase()}&populate=*`);
 
         // Combine product and brand data into a single array
-        const combinedResults = [...productResponse.data.data, ...brandResponse.data.data];
+        const combinedResults = [...productResponse.data.data];
 
         // Set the combined results in the component state
         setResults(combinedResults);
