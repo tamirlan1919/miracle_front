@@ -65,7 +65,7 @@ export default function Login() {
           >
             <Avatar sx={{ m: 1, bgcolor: 'black' }}></Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Вход
             </Typography>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
               <TextField
@@ -83,14 +83,14 @@ export default function Login() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Пароль"
                 type="password"
                 id="password"
                 autoComplete="current-password"
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+                label="Запомнить меня"
               />
               <Button
                 type="submit"
@@ -99,7 +99,7 @@ export default function Login() {
                 sx={{ mt: 3, mb: 2 }}
                 className="bg-black"
               >
-                Sign In
+               Войти
               </Button>
               {error && (
                 <Typography variant="body2" color="error">
@@ -109,12 +109,12 @@ export default function Login() {
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
-                    Forgot password?
+                    Забыли пароль ?
                   </Link>
                 </Grid>
                 <Grid item>
                   <Link href="/sign-up" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                    {"Зарегестрироваться"}
                   </Link>
                 </Grid>
               </Grid>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { authMe, postProductInCart, postProductInFavorite, deleteProductInCart } from "../../redux/slice/authSlice";
+import { authMe, postProductInCart, postProductInFavorite, deleteProductInCart, postOrder } from "../../redux/slice/authSlice";
 import { getProducts } from "../../redux/slice/productSlice";
 import { PropagateLoader } from "react-spinners";
 import { FaHeart } from 'react-icons/fa';
@@ -44,28 +44,61 @@ const Cart = () => {
     );
   }
 
-  const handleOrderSuccess = () => {
-    setIsModalOpen(false);
-
-    // Clear the cart (dispatch an action to update the cart state)
-    const field = {
-      cart: [],
-    };
-    dispatch(postProductInCart(field));
-    toast.success('Заказ успешно оформлен!', {
-      position: toast.POSITION.TOP_RIGHT,
-    });
-
-    // Trigger the callback function provided by the parent component
-    setIsOrderPlaced(true);
-  };
-
   const cart =
     Array.isArray(products) &&
     products?.filter((product) =>
       data?.cart?.some((cartItem) => Object.keys(cartItem)[0] === String(product.id))
     );
 
+    const handleOrderSuccess = async () => {
+      setIsModalOpen(false);
+    
+      // Clear the cart (dispatch an action to update the cart state)
+      const field = {
+        cart: [],
+      };
+      dispatch(postProductInCart(field));
+      
+      // Prepare data for the order
+      const orderData = {
+        order: [
+          {
+            products: cart.map((cartItem) => {
+              const productId = Object.keys(cartItem)[0];
+              const quantity = cartItem[productId];
+              return {
+                product: productId,
+                quantity,
+              };
+            }),
+            total_price: totalPrice,
+            status: "Не оплачен", // Set the initial status for the order
+          },
+        ],
+      };
+      console.log(orderData)
+      cart.forEach(element => {
+        console.log(element[0])
+      });
+      try {
+        // Dispatch the action to create an order
+        dispatch(postOrder(orderData));
+    
+        // Notify the user about the successful order
+        toast.success("Заказ успешно оформлен!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+    
+        // Trigger the callback function provided by the parent component
+        setIsOrderPlaced(true);
+      } catch (error) {
+        console.error("Error creating order:", error);
+        toast.error("Произошла ошибка при оформлении заказа", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+    };
+  
   const totalPrice =
     Array.isArray(cart) &&
     cart?.reduce(function (sum, current) {
@@ -148,8 +181,10 @@ const Cart = () => {
 
   };
   return (
+    <>
+          <div className="mb-4"><h1 className="cart-h">КОРЗИНА</h1></div>
+
     <div className="container mt-5">
-      <div className="mb-4"><h1>КОРЗИНА</h1></div>
       {cart?.length > 0 ? (
         <div className="row">
           <div className="col-md-8">
@@ -251,7 +286,7 @@ const Cart = () => {
       )}
     </div>
 
-
+</>
 
 
   );

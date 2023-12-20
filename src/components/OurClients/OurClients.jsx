@@ -37,7 +37,7 @@ const OurClients = () => {
         <div className="container"><h1 className='text-left mt-10'>Наши счастливые клиенты </h1></div>
       <Slider {...settings}>
         {reviews.map((review) => (
-          <div key={review.id} className='main-screen'>
+          <div key={review.id} className='col-xl-4 col-lg-3 col-md-6 col-sm-12'>
             <div>
               <RatingStars
                 value={review.attributes.rating}

@@ -12,9 +12,9 @@
  margin-top: 100px;
   text-align: center;
   font-weight: 900;
-  font-size: 18rem;
+  font-size: 152px;
+  margin-bottom: 50px;
   line-height: 1;
-  margin-bottom: calc(1.5 * var(--mantine-spacing-xl));
   color: var(--mantine-color-gray-2);
 
   @media (max-width: $mantine-breakpoint-sm) {

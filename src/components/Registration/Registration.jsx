@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,6 +17,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { userData } from '../../helper';
 import { regist } from '../../redux/slice/authSlice';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -24,9 +27,10 @@ export default function Registration() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { jwt } = userData();
-  const [error, setError] = React.useState(null);
-  const [successMessage, setSuccessMessage] = React.useState(null);
-
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [isOrderPlaced, setIsOrderPlaced] = React.useState(false);
+  
   React.useEffect(() => {
     if (jwt) navigate('/');
   }, [jwt]);
@@ -40,14 +44,23 @@ export default function Registration() {
 
     try {
       const request = await dispatch(regist({ username: name, email: email, password: password }));
-  
-      if (regist.rejected.match(request)) {
+      console.log(request)
+      if (request.payload == 'error') {
         // Обработка ошибки регистрации
-        setError(request.payload);
-      } else if (request.payload && request.payload.confirmed === false) {
+        toast.error("Ошибка", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+    
+        // Trigger the callback function provided by the parent component
+        setIsOrderPlaced(true);
+      } else if (request.payload) {
         // Успешная регистрация, перенаправление на страницу проверки почты
-        setSuccessMessage('Регистрация успешна! Пожалуйста, проверьте вашу почту.');
-        setError(null);
+        toast.success("Регистрация прошла успешно, проверьте почту", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+       
+        // Trigger the callback function provided by the parent component
+        setIsOrderPlaced(true);
       } else if (request.payload && request.payload.jwt) {
         // Успешная регистрация
         setSuccessMessage('Регистрация успешна!');
@@ -77,7 +90,7 @@ export default function Registration() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign up
+              Зарегестрироваться
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
@@ -88,7 +101,7 @@ export default function Registration() {
                     required
                     fullWidth
                     id="firstName"
-                    label="Full Name"
+                    label="Ник"
                     autoFocus
                   />
                 </Grid>
@@ -98,7 +111,7 @@ export default function Registration() {
                     required
                     fullWidth
                     id="email"
-                    label="Email Address"
+                    label="Почта"
                     name="email"
                     autoComplete="email"
                   />
@@ -108,17 +121,14 @@ export default function Registration() {
                     required
                     fullWidth
                     name="password"
-                    label="Password"
+                    label="Пароль"
                     type="password"
                     id="password"
                     autoComplete="new-password"
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <FormControlLabel
-                    control={<Checkbox value="allowExtraEmails" color="primary" />}
-                    label="I want to receive inspiration, marketing promotions and updates via email."
-                  />
+                  
                 </Grid>
               </Grid>
               <Button
@@ -128,7 +138,7 @@ export default function Registration() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign Up
+                Зарегестрироваться
               </Button>
               {error && (
           <Typography variant="body2" color="error">
@@ -143,7 +153,7 @@ export default function Registration() {
               <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Link href="/login" variant="body2">
-                    Already have an account? Sign in
+                    У меня есть аккаунт. Войти
                   </Link>
                 </Grid>
               </Grid>
@@ -151,6 +161,13 @@ export default function Registration() {
           </Box>
         </Container>
       </ThemeProvider>
+
+      {isOrderPlaced && (
+        <>
+        <ToastContainer autoClose={3000} hideProgressBar />
+        
+        </>
+      )}
     </div>
   );
 }

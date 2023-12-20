@@ -17,6 +17,17 @@ export const getProducts = createAsyncThunk("/getProducts", async () => {
   }
 });
 
+export const getBrands = createAsyncThunk("/getBrands", async () => {
+  try {
+    const { data } = await axios.get("/brands?populate=*");
+    return data.data;
+  } catch (error) {
+    console.warn(error);
+    alert(error);
+  }
+});
+
+
 export const getProductId = createAsyncThunk("/getProductId", async (id) => {
   try {
     const { data } = await axios.get(`/products/${id}?populate=*`);
@@ -43,6 +54,20 @@ const productSlice = createSlice({
       })
       .addCase(getProducts.rejected, (state, action) => {
         state.products = [];
+        state.status = "loading";
+        state.error = action.payload;
+      })
+
+      .addCase(getBrands.pending, (state) => {
+        state.brands = [];
+        state.status = "loading";
+      })
+      .addCase(getBrands.fulfilled, (state, action) => {
+        state.brands = action.payload;
+        state.status = "loaded";
+      })
+      .addCase(getBrands.rejected, (state, action) => {
+        state.brands = [];
         state.status = "loading";
         state.error = action.payload;
       })

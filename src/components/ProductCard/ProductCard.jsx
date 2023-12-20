@@ -78,11 +78,7 @@ const ProductCard = () => {
     }
 
 
-    setAddedProduct(productId);
-
-    setTimeout(() => {
-      setAddedProduct(null);
-    }, 3000);
+  
   };
 
   const handleToggleFavorite = (productId) => {
@@ -135,7 +131,7 @@ const ProductCard = () => {
     }
   };
 
-
+console.log(products)
   return (
     <div className='container mb-10'>
       <div className="row">

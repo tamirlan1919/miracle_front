@@ -1,0 +1,38 @@
+/* BrandPage.css */
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.brandList {
+  margin-top: 20px;
+}
+
+.brandSection {
+  margin-bottom: 20px;
+}
+
+.brandItem {
+  margin-bottom: 10px;
+}
+
+.anchorLinks {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.anchorLinks a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.anchorLinks a:hover {
+  text-decoration: underline;
+}
