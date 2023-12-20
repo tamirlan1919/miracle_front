@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authMe, updateProfile } from '../../redux/slice/authSlice';
 import { useDropzone } from 'react-dropzone';
 import { userData } from '../../helper';
-
+import { FaUser } from "react-icons/fa";
+import { IoIosExit } from "react-icons/io";
+import {Link} from 'react-router-dom'
+import './Profile.css'
 const Profile = () => {
   const dispatch = useDispatch();
   const { data, status } = useSelector((state) => state.auth);
@@ -74,18 +77,30 @@ const Profile = () => {
     <div className="container profile">
       <div className="row">
         <h1>Личная информация</h1>
-        <div className="col-3">
-          <aside>{data?.name}</aside>
-          <div className="avatar-wrapper" {...getRootProps()}>
-            {formData.user_picture ? (
-              <img src={formData.user_picture} alt="User Avatar" />
-            ) : (
-              <p>Drag 'n' drop an image here, or click to select a file</p>
-            )}
-            <input {...getInputProps()} />
-          </div>
+      <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+      <aside>
+        <div class="profile-card">
+        <Link to={`/profile`}>
+            <button class="btn btn--icon text-5xl profile-card__logout-btn">
+                <FaUser/>
+            </button>
+            </Link>
+            
+            <Link to={`/logout`}>
+            <button class="btn btn--icon text-5xl profile-card__logout-btn">
+                <IoIosExit/>
+            </button>
+            </Link>
         </div>
-        <div className="col-8">
+        <div class="links">
+            <a href="/profile">Личная информация</a>
+            <a href="/orders">Заказы</a>
+            <a href="/favorites">Избранное</a>
+        </div>
+    </aside>
+
+      </div>
+        <div className="col-xl-8 col-lg-7 col-md-6 col-sm-12">
           <form onSubmit={handleSubmit}>
             <TextField
               label="Имя"
@@ -133,27 +148,12 @@ const Profile = () => {
             />
 
             {/* ... Other input fields ... */}
-            <hr />
-            <h2>Уведомления</h2>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={formData.notification_settings}
-                  onChange={handleInputChange}
-                  name="notification_settings"
-                />
-              }
-              label="Получать новости"
-            />
-            <hr />
-            <h2>Изображение профиля</h2>
+   
             <br />
-            <Button type="submit" variant="contained" color="primary">
+            <button type='sumbit' className='text-1xl text-white bg-black uppercase px-8 py-2 rounded-lg'>
               Сохранить
-            </Button>
-            <Button type="reset" variant="contained" color="secondary">
-              Отмена
-            </Button>
+            
+            </button>
           </form>
         </div>
       </div>

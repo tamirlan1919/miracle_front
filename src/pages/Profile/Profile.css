@@ -75,3 +75,42 @@
   
   /* Customize the styles based on your design preferences */
   
+
+  .profile .links a{
+    display: block;
+    text-decoration: none;
+    color: #100a1c;
+    margin-bottom: 15px;
+    
+}
+.profile .links{
+    margin-top: 20px;
+}
+.profile .links .ls-info{
+    color: #000;
+    font-weight: 900;
+}
+.profile{
+    margin-bottom: 100px;
+
+}
+
+.profile-card{
+  background: linear-gradient(115.76deg,rgba(0, 86, 179,.09) 9.51%,rgba(19, 120, 227,.09) 66.27%);
+  border-radius: 24px;
+  padding: 40px;
+  justify-content: space-between;
+  display: flex;
+}
+
+.profile-card i{
+  font-size: 32px;
+}
+.profile-card button{
+  justify-content: flex-end;
+  padding: 0;
+}
+.profile{
+  padding-top: 60px;
+  padding-bottom: 30px;
+}
