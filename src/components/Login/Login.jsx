@@ -114,7 +114,7 @@ export default function Login() {
                 </Grid>
                 <Grid item>
                   <Link href="/sign-up" variant="body2">
-                    {"Зарегестрироваться"}
+                    {"Зарегистрироваться"}
                   </Link>
                 </Grid>
               </Grid>

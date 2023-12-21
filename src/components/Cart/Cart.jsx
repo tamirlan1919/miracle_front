@@ -201,7 +201,7 @@ const Cart = () => {
                   <div className="col-md-8">
                     <div className="card-body">
                       <div className="card-title">{attributes.name}</div>
-                      <div className="mb-1">$ {attributes.price}</div>
+                      <div className="mb-1">{attributes.price} ₽</div>
                       <div className="d-flex justify-content-between align-items-center">
                       <div className="d-flex">
                           <button
@@ -232,7 +232,7 @@ const Cart = () => {
             <div className="card">
               <div className="card-body">
                 <div className="card-title">Итог</div>
-                <div className="mb-1">Стоимость заказа: $ {Math.floor(totalPrice)}</div>
+                <div className="mb-1">Стоимость заказа: {Math.floor(totalPrice)} ₽</div>
                 <div className="mb-1">Доставка: БЕСПЛАТНО</div>
                 <hr />
                 <div className="fw-bold">ИТОГО: {Math.floor(totalPrice)} ₽</div>

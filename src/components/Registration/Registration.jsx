@@ -90,7 +90,7 @@ export default function Registration() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Зарегестрироваться
+            Зарегистрироваться
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
@@ -138,7 +138,7 @@ export default function Registration() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Зарегестрироваться
+                Зарегистрироваться
               </Button>
               {error && (
           <Typography variant="body2" color="error">

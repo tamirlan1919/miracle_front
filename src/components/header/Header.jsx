@@ -98,7 +98,7 @@ console.log(isAtTop)
         <SearchComponent />
       </div>
       <div className='col-xl-3 users col-lg-2 col-md-12 col-sm-12 pl-10 py-1 self-center text-3xl'>
-        <div className="wrap flex">
+        <div className="wrap flex align-middle">
           <div className="home">
             <a href="/">
               <button className=' btns mr-4'><MdHome /> </button>
@@ -137,13 +137,15 @@ console.log(isAtTop)
                 <BsList />
               </button>}
           </div>
+          {data ? (
           <div className={`order`}>
-            {data ? (
+           
               <Link to={'/orders'}>
                 <button className='mr-4'><FiBox /></button>
               </Link>
-            ) : ''}
+            
           </div>
+          ) : <div className='d-none'></div>}
           <div className="userr">
 
             {data ? (
