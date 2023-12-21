@@ -124,7 +124,7 @@ const Favorite = () => {
   return (
     <div className={styles.wrapper}>
       <h1>ИЗБРАННОЕ</h1>
-      <div className="container">
+      <div className="container min-h-[90vh]">
         {favorite.length > 0 ? (
           <div className="row">
             {Array.isArray(favorite) &&

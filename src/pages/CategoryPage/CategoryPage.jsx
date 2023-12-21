@@ -110,7 +110,7 @@ const CategoryPage = () => {
   }
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 min-h-[90vh]">
       <h1 className="mb-4">Products for {categorySlug}</h1>
 
       <div className="row">

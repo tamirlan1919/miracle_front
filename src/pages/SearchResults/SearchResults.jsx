@@ -168,7 +168,7 @@ const SearchResults = () => {
   if (results.length === 0) {
     return (
       <>
-        <div className="container">
+        <div className="container min-h-[90vh]">
           <div className="row">
             <h1 className={style.h1}>К сожалению, по вашему запросу ничего не найдено</h1>
             <Link to={'/'}>
@@ -181,7 +181,7 @@ const SearchResults = () => {
   }
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 min-h-[90vh]">
       <h1 className="mb-4">Products for {query}</h1>
 
       <div className="row">

@@ -1,32 +1,33 @@
-import { Footer } from 'flowbite-react';
-import img from './Frame 1 (3).svg';
-import './Footer.module.css'
-function FooterComp() {
+import { Container, Group, ActionIcon, rem } from '@mantine/core';
+import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
+import classes from './Footer.module.css';
+
+// Import your custom logo image
+import IfameLogo from './Frame 1 (3).svg';
+
+const FooterCamp = () => {
   return (
-    <footer className="footer ">
-      <div className="container py-5 text-center">
-        <div className="flex justify-between items-center">
-          <div className="max-w-[150px]">
-            {/* Replace the link and alt text with your own */}
-            <a href="/">
-              <img src={img} alt="Your Logo" />
-            </a>
-          </div>
-          <div className="links">
-            <a href="#">About</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Licensing</a>
-            <a href="#">Contact</a>
-          </div>
-        </div>
-        <hr className="my-4" />
-        <div>
-          <p>&copy; {new Date().getFullYear()} Flowbite™</p>
-        </div>
-      </div>
-    </footer>
+    <div className="container">
+    <div className={classes.footer}>
+      <Container className={classes.inner}>
+        {/* Use your custom logo here */}
+        <img src={IfameLogo} alt="iFame Logo" style={{ width: '200px', height: 'auto' }} />
+
+        <Group gap={0} className={classes.links} justify="flex-end" wrap="nowrap">
+          <ActionIcon size="lg" color="gray" variant="subtle" className='mr-5'>
+            <IconBrandTwitter style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
+          </ActionIcon>
+          <ActionIcon size="lg" color="gray" variant="subtle" className='mr-5'>
+            <IconBrandYoutube style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
+          </ActionIcon>
+          <ActionIcon size="lg" color="gray" variant="subtle" className='mr-5'>
+            <IconBrandInstagram style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
+          </ActionIcon>
+        </Group>
+      </Container>
+    </div>
+    </div>
   );
-};
+}
 
-
-export default FooterComp
+export default FooterCamp;

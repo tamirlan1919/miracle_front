@@ -184,7 +184,7 @@ const Cart = () => {
     <>
           <div className="mb-4"><h1 className="cart-h">КОРЗИНА</h1></div>
 
-    <div className="container mt-5">
+    <div className="container mt-5 min-h-[90vh]">
       {cart?.length > 0 ? (
         <div className="row">
           <div className="col-md-8">
