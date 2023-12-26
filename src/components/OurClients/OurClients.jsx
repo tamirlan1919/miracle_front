@@ -34,7 +34,7 @@ const OurClients = () => {
 
   return (
     <div className='pl-4'>
-        <div className="container"><h1 className='text-left mt-10'>Наши счастливые клиенты </h1></div>
+        <div className="container"><h1 className='our text-left mt-10'>Наши счастливые клиенты </h1></div>
       <Slider {...settings}>
         {reviews.map((review) => (
           <div key={review.id} className='col-xl-4 col-lg-3 col-md-6 col-sm-12'>

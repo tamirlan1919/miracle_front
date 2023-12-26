@@ -14,6 +14,7 @@ import { CButton, COffcanvas, COffcanvasHeader, COffcanvasTitle, CCloseButton, C
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { createOrder } from "../../redux/slice/orderSlise";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -43,12 +44,15 @@ const Cart = () => {
       </div>
     );
   }
-
   const cart =
     Array.isArray(products) &&
     products?.filter((product) =>
       data?.cart?.some((cartItem) => Object.keys(cartItem)[0] === String(product.id))
     );
+    const cartData = data?.cart.map(item => ({
+      id: Object.keys(item)[0],
+      quantity: item[Object.keys(item)[0]]
+    }));
 
     const handleOrderSuccess = async () => {
       setIsModalOpen(false);
@@ -61,28 +65,21 @@ const Cart = () => {
       
       // Prepare data for the order
       const orderData = {
-        order: [
-          {
-            products: cart.map((cartItem) => {
-              const productId = Object.keys(cartItem)[0];
-              const quantity = cartItem[productId];
-              return {
-                product: productId,
-                quantity,
-              };
-            }),
-            total_price: totalPrice,
-            status: "Не оплачен", // Set the initial status for the order
-          },
-        ],
-      };
-      console.log(orderData)
-      cart.forEach(element => {
-        console.log(element[0])
-      });
+        data:{
+        total_price: Math.floor(totalPrice),
+        status: "не оплачен", // Здесь вы можете установить нужный вам статус
+        user: data.id,
+        products: cart.map(item => item.id),
+        values: {
+          products: cartData
+        }
+      }
+      }
+     
+      
       try {
         // Dispatch the action to create an order
-        dispatch(postOrder(orderData));
+        dispatch(createOrder(orderData));
     
         // Notify the user about the successful order
         toast.success("Заказ успешно оформлен!", {
@@ -99,12 +96,7 @@ const Cart = () => {
       }
     };
   
-  const totalPrice =
-    Array.isArray(cart) &&
-    cart?.reduce(function (sum, current) {
-      return sum + current.attributes.price;
-    }, 0);
-
+ 
   const isProductInFavorites = (productId) => {
     return Array.isArray(data?.favorite) && data.favorite.some((item) => Object.keys(item)[0] === String(productId));
   };
@@ -155,6 +147,13 @@ const Cart = () => {
     const cartItem = data?.cart.find((item) => Object.keys(item)[0] === String(productId));
     return cartItem ? cartItem[productId] : 0;
   };
+  const totalPrice =
+  Array.isArray(cart) &&
+  cart?.reduce(function (sum, current) {
+    const quantity = getProductQuantity(current.id); // Get the quantity for the current item
+    return sum + quantity * current.attributes.price;
+  }, 0);
+
   const handleAddToCart = (productId) => {
     const existingCart = Array.isArray(data?.cart) ? data.cart : [];
 
@@ -182,7 +181,7 @@ const Cart = () => {
   };
   return (
     <>
-          <div className="mb-4"><h1 className="cart-h">КОРЗИНА</h1></div>
+          <div className="mb-4"><h1 className={styles.carttt}>КОРЗИНА</h1></div>
 
     <div className="container mt-5 min-h-[90vh]">
       {cart?.length > 0 ? (
@@ -290,6 +289,6 @@ const Cart = () => {
 
 
   );
-};
+      }
 
 export default Cart;

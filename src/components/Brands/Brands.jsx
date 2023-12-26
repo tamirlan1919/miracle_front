@@ -22,7 +22,7 @@ const Brands = () => {
   return (
     <div className=''>
       <div className="container main">
-              <h1>Выбери свою категорию</h1>
+              <h1 className='bra'>Выбери свою категорию</h1>
         <div className="row">
 
 

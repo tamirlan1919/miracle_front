@@ -1,0 +1,18 @@
+.order-info{
+    border: 1px solid rgba(16,10,28,.05);
+    border-radius: 12px;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding: 24px;
+  }
+  .top-info{
+    background-color: #F7F8FA;
+    width: 100%;
+  }
+  .top-info h2{
+    color: #070707;
+    font-size: 20px;
+    line-height: 1.3;
+  }
+ 
+  

@@ -1,85 +1,139 @@
-/* ... existing styles ... */
-
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+.loader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 160px 0px;
+}
+.carttt {
+  font-weight: 100;
+  background-color: #f7f8fa;
+  display: flex;
+  justify-content: center;
+  height: 80px;
+  align-items: center;
+  
 }
 
-.product_item {
-  background-color: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  position: relative;
 
-  .image {
-    img {
-      width: 50%;
-      border-radius: 8px;
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+
+  .title {
+    max-width: 750px;
+    h1 {
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+    span {
+      font-size: 13px;
+      color: #7e7d7d;
+      margin-top: 12px;
     }
   }
 
-  // ... other styles ...
+  .products__items {
+    width: 100%;
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
 
-  .amount {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 15px;
+    .product {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
 
-    button {
-      background-color: #3498db;
-      color: #fff;
-      border: none;
-      padding: 8px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: black;
+      .gallery_container {
+        position: relative;
+        display: flex;
+        justify-content: center;
       }
-    }
 
-    .select_amout {
-      margin: 0 10px;
+      .thumbnails {
+        position: absolute;
+        bottom: 8px;
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+      }
 
-      select {
-        padding: 8px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
+      .thumbnails div {
+        width: 8px;
+        height: 8px;
         cursor: pointer;
-      }
-    }
-  }
-
-  .favorite {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-
-    button {
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-
-      svg {
-        font-size: 24px;
-        color: #e74c3c;
-        transition: color 0.3s ease;
+        background: #aaa;
+        border-radius: 100%;
       }
 
-      &:hover {
-        svg {
-          color: #c0392b;
+      .thumbnails div.highlighted {
+        background-color: #777;
+      }
+
+      .slides {
+        display: grid;
+        grid-auto-flow: column;
+        width: 333px;
+        overflow-y: auto;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+      }
+
+      .slides > div {
+        scroll-snap-align: start;
+      }
+
+      .slides img {
+        width: 333px;
+        cursor: pointer;
+        object-fit: contain;
+      }
+
+      .slides::-webkit-scrollbar {
+        display: none;
+      }
+
+      .btn {
+        bottom: 0;
+        left: 290px;
+        bottom: 45px;
+        position: relative;
+        button {
+          border: none;
+          background-color: inherit;
+          position: absolute;
+          cursor: pointer;
+          width: 30px;
+          height: 30px;
+          background-position: center;
+          background-size: 100%;
+          background-repeat: no-repeat;
+          background-image: url("https://cdn-icons-png.flaticon.com/512/2961/2961937.png");
+        }
+      }
+
+      .info_product {
+        width: 100%;
+        line-height: 22px;
+
+        p {
+          font-size: 13px;
+          cursor: pointer;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        span {
+          font-size: 13px;
         }
       }
     }
   }
 }
-
-/* ... other styles ... */
 
 .empty_cart {
   height: 500px;
@@ -119,11 +173,3 @@
     }
   }
 
-  .cart-h {
-    font-weight: 100;
-    background-color: #f7f8fa;
-    display: flex;
-    justify-content: center;
-    height: 80px;
-    align-items: center;
-  }
