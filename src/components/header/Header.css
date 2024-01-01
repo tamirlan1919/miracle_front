@@ -22,15 +22,18 @@
   float: right;
 }
 
-.sticky-toop{
+.sticky-top {
   position: -webkit-sticky;
   position: sticky;
   top: 100px;
-  z-index: 1000; /* Число можно настроить в зависимости от вашего дизайна */
-  background-color: white; /* Цвет фона хедера при прилипании */
+  z-index: 99000;
+  background-color: white;
 }
 header {
 
+}
+.best{
+  z-index: 99999;
 }
 
 .sticky-content {

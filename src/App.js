@@ -26,6 +26,7 @@ import AllCategory from './pages/AllCategory/AllCategory';
 import SearchResults from './pages/SearchResults/SearchResults';
 import Orders from './pages/Orders/Orders';
 import BrandPage from './pages/BrandPage/BrandPage';
+import StickyBox from "react-sticky-box";
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
     <>
     <MantineProvider defaultColorScheme='dark'>
     <BrowserRouter>
+    <Nav/>
     <Header/>
     <Routes>
       <Route path="/" element={<Home />} />

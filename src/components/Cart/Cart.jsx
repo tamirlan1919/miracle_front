@@ -194,7 +194,7 @@ const Cart = () => {
                     <img
                       src={`${attributes?.image.data.attributes.formats.thumbnail.url}`}
                       alt=""
-                      className="img-fluid"
+                      className="w-[200px]"
                     />
                   </div>
                   <div className="col-md-8">

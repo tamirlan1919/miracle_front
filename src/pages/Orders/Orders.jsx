@@ -8,19 +8,22 @@ import styles from "./order.module.scss";
 import image from "./image.png";
 import "./order.css";
 import { IoMdCheckmark, IoMdClose, IoMdPaperPlane, IoMdWallet } from "react-icons/io";
+import { getProducts } from "../../redux/slice/productSlice";
 
 const Orders = () => {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.auth);
-  const { orders, status } = useSelector((state) => state.orders); // Corrected from state.orders to state.order
+  const { products, status } = useSelector((state) => state.products);
+  const { orders,  } = useSelector((state) => state.orders); // Corrected from state.orders to state.order
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(authMe());
+    dispatch(getProducts());
     dispatch(getOrdersId());
   }, [dispatch]);
 
-  if (status === "loading") {
+  if (status == "loading") {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
         <PropagateLoader color="#000" />
@@ -36,7 +39,10 @@ const Orders = () => {
     );
   }
 
-  console.log(orders);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -44,13 +50,13 @@ const Orders = () => {
       <div className="container">
         {orders.length > 0 ? (
           <div className="row">
-            {orders?.map(({ attributes, id, products }) => (
+            {orders?.map(({ attributes, id, values }) => (
               <div
                 key={id}
-                className="order-info  p-3 col-xl-12 col-lg-12 col-md-12 col-sm-12 rounded-lg overflow-hidden mb-3"
+                className="order-info p-3 col-xl-12 col-lg-12 col-md-12 col-sm-12 rounded-lg overflow-hidden mb-3"
               >
                 <div className="flex">
-                  <h2 className="mb-2 mr-10">Заказ от {attributes?.createdAt}</h2>
+                  <h2 className="mb-2 mr-10">Заказ от {formatDate(attributes?.createdAt)}</h2>
                   <p className="text-[15px] text-[#028103] font-bold  mb-2">ID: {id}</p>
                 </div>
                 <div className="flex">
@@ -59,25 +65,8 @@ const Orders = () => {
                 </div>
 
                 <div className="">
-                  <h3>Товары в заказе:</h3>
-                  <ul>
-                  {products?.map((product) => (
-                      <li key={product.id}>
-                        <div className="">
-                          <div>
-                            <img
-                              src={products.data.find((p) => p.id === parseInt(product.id, 10))?.attributes.image}
-                              alt={products.data.find((p) => p.id === parseInt(product.id, 10))?.attributes.name}
-                              style={{ width: "50px", height: "50px", marginRight: "10px" }}
-                            />
-                          </div>
-                          <div>
-                            {products.data.find((p) => p.id === parseInt(product.id, 10))?.attributes.name} - {product.quantity} шт.
-                          </div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
+   
+
                 </div>
               </div>
             ))}
