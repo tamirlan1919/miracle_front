@@ -65,7 +65,7 @@ console.log(isAtTop)
   return (
     <>
 
-      <div className={`best items-center p-2 ${isAtTop ? 'sticky-top' : ''}`}>
+      <div className={`best items-center p-2 ${isAtTop ? '' : ''}`}>
   <div className='container mb-3'>
     <div className={`row ${isAtTop ? 'sticky-top' : ''}`}>
       <div className="imgs col-xl-2 mr-[50px] col-lg-2">
