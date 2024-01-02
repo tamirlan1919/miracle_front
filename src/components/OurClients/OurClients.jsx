@@ -28,7 +28,7 @@ const OurClients = () => {
     infinite: true,
     autoplay: true,
     speed: 200,
-    slidesToShow: 2,
+    slidesToShow: 1,
     slidesToScroll: 1,
   };
 

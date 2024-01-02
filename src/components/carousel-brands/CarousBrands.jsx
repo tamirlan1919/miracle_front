@@ -11,7 +11,7 @@ const CarousBrands = () => {
     infinite: true,
     autoplay: true,
     speed: 200,
-    slidesToShow: 4, // Количество отображаемых слайдов одновременно
+    slidesToShow: 1, // Количество отображаемых слайдов одновременно
     slidesToScroll: 1,
   };
 

@@ -27,9 +27,14 @@ import SearchResults from './pages/SearchResults/SearchResults';
 import Orders from './pages/Orders/Orders';
 import BrandPage from './pages/BrandPage/BrandPage';
 import StickyBox from "react-sticky-box";
-
+import { authMe } from './redux/slice/authSlice';
+import { getCategories, getProducts } from './redux/slice/productSlice';
+import { HashLoader } from 'react-spinners';
+import styles from './App.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 function App() {
-
+ 
 
 
 

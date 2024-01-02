@@ -84,11 +84,12 @@ const ProductDetails = () => {
 
   const calculateDiscountPercent = () => {
     if (products.attributes?.is_on_sale && products.attributes?.old_price !== null) {
-      const discountPercent = ((products.attributes?.old_price - products.attributes?.price) / products.old_price) * 100;
-      return discountPercent.toFixed(0);
+      const discountPercent = ((products.attributes?.old_price - products.attributes?.price) / products.attributes?.old_price) * 100;
+      return isNaN(discountPercent) ? 0 : discountPercent.toFixed(0);
     }
     return 0;
   };
+  
 
   const [isFilled, setIsFilled] = useState(false);
 
