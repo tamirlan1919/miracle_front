@@ -7,7 +7,7 @@ import styles from './BrandPage.css';
 
 const BrandPage = () => {
   const { brands, status } = useSelector((state) => state.products);
-  const { slug } = useParams();
+  const { name } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const BrandPage = () => {
               .filter((brand) => brand.attributes?.name.charAt(0).toUpperCase() === letter)
               .map((brand) => (
                 <div key={brand?.id} className="col mb-10">
-                  <a href={`/brands/${brand.attributes?.slug}`} className="text-black">
+                  <a href={`/brands/${brand.attributes?.name}`} className="text-black">
                     {brand.attributes?.name}
                   </a>
                 </div>

@@ -47,7 +47,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="shops" element={<Shops />} />
-      <Route path="products/:slug/:id" element={<ProductDetails />} />
+      <Route path="products/:id" element={<ProductDetails />} />
       <Route path = 'about' element = {<About/>}/>
       <Route path = 'work' element = {<Work/>}/>
       <Route path="login" element={<Login />} />
@@ -58,9 +58,9 @@ function App() {
       <Route path="profile" element={<Profile />} />
       <Route path='category' element = {<AllCategory/>}/>
       <Route path="/search-results/:query" element={<SearchResults/>} />
-      <Route path="categories/:categorySlug" element={<CategoryPage/>} />
+      <Route path="categories/:name" element={<CategoryPage/>} />
       <Route path="brands/" element={<BrandPage/>} />
-      <Route path="brands/:slug" element={<BrandProducts/>} />
+      <Route path="brands/:name" element={<BrandProducts/>} />
       <Route path="orders" element={<Orders/>} />
       
       <Route path='*' element={<NotPage/>} />

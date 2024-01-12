@@ -135,9 +135,9 @@ const ProductCategoryCard = ({ product }) => {
             }
         
 
-            <Link to={`/products/${product.attributes?.slug}/${product?.id}`}>
+            <Link to={`/products/${product?.id}`}>
               <img
-                src={`${product.attributes?.image.data.attributes.url}`}
+                src={`${process.env.REACT_APP_UPLOAD_URL}`+`${product.attributes?.image.data.attributes.url}`}
                 alt={product.attributes?.name}
                 className="w-full max-h-[170px] object-contain object-center"
               />

@@ -29,7 +29,7 @@ const MyCarousel = () => {
             {banner.attributes?.image?.data.map((imageData) => (
               <img
                 key={imageData.id}
-                src={imageData.attributes.url}
+                src={`${process.env.REACT_APP_UPLOAD_URL}`+`${imageData.attributes.url}`}
                 alt={imageData.attributes.name || `Banner ${banner.id}`}
               />
             ))}

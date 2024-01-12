@@ -141,7 +141,7 @@ const Favorite = () => {
               </button>
                   <Link to={`http://127.0.0.1:3000/products/${attributes?.slug}/${id}`}>
                     <img
-                      src={`${attributes?.image.data.attributes.url}`}
+                      src={`${process.env.REACT_APP_UPLOAD_URL+attributes?.image.data.attributes.url}`}
                       alt={attributes?.name}
                       className="w-full max-h-[170px] object-contain object-center"
                     />

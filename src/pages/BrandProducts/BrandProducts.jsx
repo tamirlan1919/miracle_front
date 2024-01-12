@@ -7,7 +7,7 @@ import ProductCategoryCard from '../../components/ProductCategoryCard/ProductCat
 import styles from './BrandProducts.css';
 
 const BrandProducts = () => {
-  const { slug } = useParams();
+  const { name } = useParams();
   const dispatch = useDispatch();
   const { products: originalProducts, status: productsStatus } = useSelector((state) => state.products);
   const [products, setProducts] = useState([]);
@@ -18,7 +18,6 @@ const BrandProducts = () => {
   });
   const [sortType, setSortType] = useState('default');
   const [sortDirection, setSortDirection] = useState('asc');
-
   useEffect(() => {
     // Dispatch the necessary actions to fetch products and brands when the component mounts
     dispatch(getProducts());
@@ -27,16 +26,17 @@ const BrandProducts = () => {
   useEffect(() => {
     setProducts(originalProducts);
   }, [originalProducts]);
-
   useEffect(() => {
     if (originalProducts) {
       // Filter products based on the brand slug from the URL
       const filteredProducts = originalProducts.filter(
-        (product) => product.attributes.brand.data.attributes.slug === slug
+        (product) => product?.attributes.brand.data.attributes.name === name
       );
       setProducts(filteredProducts);
+    
     }
-  }, [originalProducts, slug]);
+   
+  }, [originalProducts, name]);
 
   const sortedProducts = useMemo(() => {
     // Implement your sorting logic here based on the Redux state
@@ -113,7 +113,7 @@ const BrandProducts = () => {
 
   return (
     <div className="container mt-4">
-      <h1 className="mb-4">Products for {slug}</h1>
+      <h1 className="mb-4">Products for {name}</h1>
 
       <div className="row">
         <div className="col-md-3">

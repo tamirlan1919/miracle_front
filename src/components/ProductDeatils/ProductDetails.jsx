@@ -227,7 +227,7 @@ const ProductDetails = () => {
   };
   useEffect(() => {
     if (products && products.attributes?.image && products.attributes?.image.data) {
-      setMainImage(`${products.attributes?.image.data.attributes.url}`);
+      setMainImage(`${process.env.REACT_APP_UPLOAD_URL}`+`${products.attributes?.image.data.attributes.url}`);
     }
   }, [products]);
 
@@ -254,7 +254,7 @@ const ProductDetails = () => {
                 products.attributes?.image2.data.map((image, index) => (
                   <img
                     key={index}
-                    src={`${image.attributes?.url}`}
+                    src={`${process.env.REACT_APP_UPLOAD_URL}`+`${image.attributes?.url}`}
                     width={'150px'}
                     alt={`Product ${index}`}
                     className="thumbnail mb-2 rounded-lg"

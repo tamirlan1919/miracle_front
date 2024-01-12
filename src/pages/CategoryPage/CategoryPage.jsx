@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { getProducts } from '../../redux/slice/productSlice';
 
 const CategoryPage = () => {
-  const { categorySlug } = useParams();
+  const { name } = useParams();
   const dispatch = useDispatch();
   const { products: originalProducts, status } = useSelector((state) => state.products);
   const [products, setProducts] = useState([]);
@@ -18,9 +18,8 @@ const CategoryPage = () => {
 
   const [sortType, setSortType] = useState('default');
   const [sortDirection, setSortDirection] = useState('asc');
-
+  
   useEffect(() => {
-    // Dispatch the getProducts action to fetch products when the component mounts
     dispatch(getProducts());
   }, [dispatch]);
 
@@ -28,17 +27,18 @@ const CategoryPage = () => {
     setProducts(originalProducts);
   }, [originalProducts]);
 
+
+
   useEffect(() => {
-    if (originalProducts) {
-      // Filter products based on the category slug from the URL
+    if (originalProducts && name) {
       const filteredProducts = originalProducts.filter(
-        (product) => product.attributes.category?.data.attributes.slug === categorySlug
+        (product) => product?.attributes.category.data.attributes.name === name
       );
       setProducts(filteredProducts);
     }
-  }, [originalProducts, categorySlug]);
-
+  }, [originalProducts, name]);
   
+  console.log(products)
 
   const sortedProducts = useMemo(() => {
     // Implement your sorting logic here based on the Redux state
@@ -111,7 +111,7 @@ const CategoryPage = () => {
 
   return (
     <div className="container mt-4 min-h-[90vh]">
-      <h1 className="mb-4">Products for {categorySlug}</h1>
+      <h1 className="mb-4">Категория {name}</h1>
 
       <div className="row">
         <div className="col-md-3">

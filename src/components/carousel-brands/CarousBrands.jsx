@@ -36,7 +36,7 @@ const CarousBrands = () => {
         {banners.map((banner) => (
           <div key={banner.id} className='pt-2 pb-2'>
                 <img
-                  src={banner.attributes?.image.data.attributes.url}
+                  src={process.env.REACT_APP_UPLOAD_URL+ banner.attributes?.image.data.attributes.url}
                   alt={banner.attributes?.image.data.attributes.name || `Banner ${banner.id}`}
                   className='w-[200px]'
                 />

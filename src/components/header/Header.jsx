@@ -54,7 +54,6 @@ const Header = () => {
   
 
   }, [dispatch]);
-console.log(isAtTop)
   useEffect(() => {
     // Получите аватар, если у пользователя есть данные
     if (data) {
@@ -165,7 +164,7 @@ console.log(isAtTop)
   </div>
 </div>
 
-      <COffcanvas placement="start" className= 'text-black' scroll={true} visible={isModalOpen} onHide={closeModal}>
+      <COffcanvas placement="start" className= 'text-black z-[9999999]' scroll={true} visible={isModalOpen} onHide={closeModal}>
         <COffcanvasHeader>
           <COffcanvasTitle>Miracle</COffcanvasTitle>
           
@@ -180,7 +179,7 @@ console.log(isAtTop)
             <ul className="list-group">
               {categories?.map((category) => (
                 <li key={category?.id} className="list-group-item">
-                  <Link to={`/categories/${category.attributes?.slug}`} onClick={closeModal}>
+                  <Link to={`/categories/${category?.attributes.name}`} onClick={closeModal}>
                     {category.attributes?.name}
                   </Link>
                 </li>

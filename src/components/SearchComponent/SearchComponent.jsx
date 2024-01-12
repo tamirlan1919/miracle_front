@@ -13,7 +13,7 @@ const SearchComponent = () => {
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
-        const response = await axios.get(`/products?filters[slug][$contains]=${query}&populate=*`);
+        const response = await axios.get(`/products?filters[name][$contains]=${query}&populate=*`);
         setSuggestions(response.data.data);
         setShowSuggestions(true); // Show suggestions when there are results
       } catch (error) {
@@ -29,8 +29,8 @@ const SearchComponent = () => {
     }
   }, [query]);
 
-  const handleSelect = (slug, productId) => {
-    navigate(`/products/${slug}/${productId}`);
+  const handleSelect = (name, productId) => {
+    navigate(`/products/${productId}`);
     setQuery('');
     setShowSuggestions(false); // Hide suggestions after selecting an item
   };
@@ -81,10 +81,10 @@ const SearchComponent = () => {
             <li
               key={suggestion.id}
               className="pt-2 px-3 mb-2 flex items-center cursor-pointer"
-              onClick={() => handleSelect(suggestion.attributes.slug, suggestion.id)}
+              onClick={() => handleSelect(suggestion.attributes.name, suggestion.id)}
             >
               <img
-                src={`${suggestion.attributes?.image.data.attributes.url}`}
+                src={`${process.env.REACT_APP_UPLOAD_URL}`+`${suggestion.attributes?.image.data.attributes.url}`}
                 alt={suggestion.attributes.name}
                 className="w-9 h-12 mr-2"
               />

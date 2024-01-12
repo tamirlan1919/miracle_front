@@ -72,7 +72,8 @@ const Cart = () => {
         products: cart.map(item => item.id),
         values: {
           products: cartData
-        }
+        },
+      
       }
       }
      
@@ -192,7 +193,7 @@ const Cart = () => {
                 <div className="row g-0">
                   <div className="col-md-4">
                     <img
-                      src={`${attributes?.image.data.attributes.formats.thumbnail.url}`}
+                      src={`${process.env.REACT_APP_UPLOAD_URL}`+`${attributes?.image.data.attributes.formats.thumbnail.url}`}
                       alt=""
                       className="w-[200px]"
                     />

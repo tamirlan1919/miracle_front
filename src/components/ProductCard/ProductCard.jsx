@@ -131,7 +131,11 @@ const ProductCard = () => {
     }
   };
 
-console.log(products)
+
+  products.forEach(element => {
+    console.log(`${process.env.REACT_APP_UPLOAD_URL+element.attributes?.image.data.attributes?.url}`)
+  });
+
   return (
     <div className='container mb-10'>
       <div className="row">
@@ -165,9 +169,9 @@ console.log(products)
             }
         
 
-            <Link to={`/products/${product.attributes?.slug}/${product?.id}`}>
+            <Link to={`/products/${product?.id}`}>
               <img
-                src={`${product.attributes?.image.data.attributes.url}`}
+                src={`${process.env.REACT_APP_UPLOAD_URL}`+`${product.attributes?.image.data.attributes?.url}`}
                 alt={product.attributes?.name}
                 className="w-full max-h-[170px] object-contain object-center"
               />
