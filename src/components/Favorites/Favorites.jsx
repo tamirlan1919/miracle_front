@@ -85,11 +85,13 @@ const Favorite = () => {
   }
 
   const favorite =
-    Array.isArray(products) &&
-    data.favorite &&
-    products?.filter((product) =>
-      data.favorite.some((favoriteId) => Object.keys(favoriteId)[0] === String(product.id))
-    );
+  Array.isArray(products) &&
+  data.favorite &&
+  products?.filter((product) => {
+    const isInFavorites = data.favorite.some((favoriteId) => Object.keys(favoriteId)[0] === String(product.id));
+    return product.attributes?.available && isInFavorites;
+  });
+
 
   const deleteFav = (productId) => {
     if (!data.favorite) {
@@ -139,7 +141,7 @@ const Favorite = () => {
               >
                 <FaHeart className="inline-block mr-1 text-2xl text-black hover:text-gray-300 transition-colors duration-300 " />
               </button>
-                  <Link to={`http://127.0.0.1:3000/products/${attributes?.slug}/${id}`}>
+                  <Link to={`http://127.0.0.1:3000/products/${id}`}>
                     <img
                       src={`${process.env.REACT_APP_UPLOAD_URL+attributes?.image.data.attributes.url}`}
                       alt={attributes?.name}

@@ -28,7 +28,7 @@ const OurClients = () => {
     infinite: true,
     autoplay: true,
     speed: 200,
-    slidesToShow: 1,
+    slidesToShow: 3,
     slidesToScroll: 1,
   };
 console.log(reviews)
@@ -37,7 +37,7 @@ console.log(reviews)
         <div className="container"><h1 className='our text-left mt-10'>Наши счастливые клиенты </h1></div>
       <Slider {...settings}>
         {reviews.map((review) => (
-          <div key={review.id} className='col-xl-4 col-lg-3 col-md-6 col-sm-12'>
+          <div key={review.id} className='col-xl-4 col-lg-3 col-md-6 col-sm-12 os'>
             <div>
               <RatingStars
                 value={review.attributes.rating}

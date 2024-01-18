@@ -45,16 +45,18 @@ const Cart = () => {
     );
   }
   const cart =
-    Array.isArray(products) &&
-    products?.filter((product) =>
-      data?.cart?.some((cartItem) => Object.keys(cartItem)[0] === String(product.id))
-    );
-    const cartData = data?.cart.map(item => ({
+  Array.isArray(products) &&
+  products?.filter((product) => {
+    const isInCart = data?.cart?.some((cartItem) => Object.keys(cartItem)[0] === String(product.id));
+    return product.attributes?.available && isInCart;
+  });
+
+    const cartData = data?.cart?.map(item => ({
       id: Object.keys(item)[0],
+      
       quantity: item[Object.keys(item)[0]]
     }));
-
-    const handleOrderSuccess = async () => {
+    const handleOrderSuccess = async (formData) => {
       setIsModalOpen(false);
     
       // Clear the cart (dispatch an action to update the cart state)
@@ -73,6 +75,16 @@ const Cart = () => {
         values: {
           products: cartData
         },
+        address :{
+          phoneNumber: formData.phoneNumber,
+          country: formData.country,
+          city: formData.city,
+          address: formData.address,
+          house: formData.house,
+          kv: formData.kv,
+
+
+        }
       
       }
       }

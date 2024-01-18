@@ -166,7 +166,9 @@ const Header = () => {
 
       <COffcanvas placement="start" className= 'text-black z-[9999999]' scroll={true} visible={isModalOpen} onHide={closeModal}>
         <COffcanvasHeader>
-          <COffcanvasTitle>Miracle</COffcanvasTitle>
+          <COffcanvasTitle>     <div className="w-[70%]">
+        <a href="/" className='miracle'><img className='miracle_img w-full' src={img} alt="" /></a>
+      </div></COffcanvasTitle>
           
           <button className='text-3xl' onClick={closeModal}>
             <IoIosClose/>

@@ -33,6 +33,7 @@ import { HashLoader } from 'react-spinners';
 import styles from './App.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import ScrollToTop from './components/ScrollTop/ScrollToTop';
 function App() {
  
 

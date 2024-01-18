@@ -10,7 +10,8 @@ import axios from '../../api.js';
 import  './ProductDeatils.css'; // Ensure the correct path
 import ProductDetailsInfo from './ProductDetailsInfo';
 import ProductDetailsInfoDouble from './ProductDetailsInfoDouble';
-
+import styles from './ProductDeatils.css'
+import { PropagateLoader } from 'react-spinners';
 const ProductDetails = () => {
   const settings = {
     dots: true,
@@ -21,7 +22,7 @@ const ProductDetails = () => {
   };
   const { slug } = useParams();
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.products);
+  const { products,status } = useSelector((state) => state.products);
   const { id } = useParams();
   const { data } = useSelector((state) => state.auth);
   const url = 'http:localhost:1377';
@@ -48,7 +49,7 @@ const ProductDetails = () => {
       try {
         const response = await axios.get(`/products?populate=*`, {
           headers: {
-            Authorization: 'Bearer ' + '3d88455b557a9ed455d8a8fdeaffd78b2cb3946c64457604faafd861a095e4d61c39a59431c3d804ea47489794812eca0caa91a2cc5c87938b3cdd744b163e6965ec973c4676543df51e5365aef02e252188c1bedf7188b08b8843addd2dcf7346c6f3ea4461a6e842652f7f1c3a9f5ea25aee760cbd299f327fa3455e96d591',
+            Authorization: 'Bearer ' + '4738350533aa2646e326070492ea2cfcc61bd9e9b3af35f14367ebae1cd21c888e5012903cd055b11862b728e97f75dca6b5fbfcf0959ea028ced92086037ff57744682682cac6f0241222a679e0b58689760735c624f69134b1e3d230e10e1437bf1e4d2e7dd2947b5ec0174529813e7fc1084dd92d4eaca44d274f30da3af8',
           },
         });
 
@@ -230,7 +231,14 @@ const ProductDetails = () => {
       setMainImage(`${process.env.REACT_APP_UPLOAD_URL}`+`${products.attributes?.image.data.attributes.url}`);
     }
   }, [products]);
-
+  if (status === "loading") {
+    
+    return (
+      <div className={styles.loader}>
+        <PropagateLoader color="#000" />
+      </div>
+    );
+  }
   if (!products) {
     return (
       <div>
@@ -238,10 +246,12 @@ const ProductDetails = () => {
       </div>
     );
   }
+
   return (
     <>
     <div className="container">
       <div className="row">
+        
         <div className="info">
           <a href="/" className="mr-3">
             Home
@@ -373,23 +383,16 @@ const ProductDetails = () => {
 
         </div>
       </div>
-        <div className="row mt-5 mb-5">
-          <div className="col-xl-6 text-2xl text-center">
-            <ProductDetailsInfo product={products.attributes?.characteristic}/>
-          </div>
-          <div className="col-xl-6 text-2xl text-center">
-            <ProductDetailsInfoDouble/>
-          </div>
-        </div>
+
         <div className="row">
-          <h1 className='text-2xl text-center mt-5 mb-5'>Похожие товары</h1>
+          <h1 className='text-2xl  text-center pt-10 mb-5'>Похожие товары</h1>
           {all_products.map((products) => (
               (products.id!=id ? 
-          <div key={products.id} className="max-w-sm cart col-xl-3 col-lg-4 col-md-6 col-sm-12 rounded-lg overflow-hidden">
-            <Link to={`/products/${products.attributes.slug}/${products.id}`}>
+          <div key={products.id} className="max-w-sm cart col-xl-3 col-lg-3 col-md-6 col-sm-12 rounded-lg overflow-hidden">
+            <Link to={`/products/${products.id}`}>
 
               <img
-                src={`${products.attributes.image.data.attributes.url}`}
+                src={`${ process.env.REACT_APP_UPLOAD_URL+products.attributes.image.data.attributes.url}`}
                 alt={products.attributes.name}
                 className="w-full max-h-[170px] object-contain object-center"
               />

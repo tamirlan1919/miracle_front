@@ -34,3 +34,19 @@ line-height: 22px; /* 110% */
 .text{
     overflow-y: scroll;
 }
+
+.os{
+    display: flex;
+width: 400px;
+height: 240px;
+padding: 28px 32px;
+align-items: flex-start;
+align-content: flex-start;
+padding: 24px 32px;
+max-width: 400px;
+gap: 24px 342px;
+flex-shrink: 0;
+flex-wrap: wrap;
+border-radius: 20px;
+border: 1px solid rgba(0, 0, 0, 0.10);
+}

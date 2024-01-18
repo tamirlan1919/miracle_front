@@ -50,7 +50,7 @@ const Orders = () => {
       <div className="container">
         {orders.length > 0 ? (
           <div className="row">
-            {orders?.map(({ attributes, id, values }) => (
+            {orders?.slice().reverse().map(({ attributes, id, values }) => (
               <div
                 key={id}
                 className="order-info p-3 col-xl-12 col-lg-12 col-md-12 col-sm-12 rounded-lg overflow-hidden mb-3"

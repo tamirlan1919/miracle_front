@@ -113,3 +113,11 @@ border-radius: 62px;
 }
 
 }
+.loader {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 160px 0px;
+  }

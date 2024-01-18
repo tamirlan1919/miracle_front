@@ -42,7 +42,7 @@ const CheckoutForm = ({ totalPrice,onOrderSuccess }) => {
 
       // For demonstration purposes, let's assume the order is successfully placed
 
-      onOrderSuccess();
+      onOrderSuccess(formData);
       // Trigger the callback function provided by the parent component
    
 

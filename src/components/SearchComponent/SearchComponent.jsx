@@ -13,7 +13,7 @@ const SearchComponent = () => {
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
-        const response = await axios.get(`/products?filters[name][$contains]=${query}&populate=*`);
+        const response = await axios.get(`/products?filters[name][$contains]=${query}&filters[available]=true&populate=*`);
         setSuggestions(response.data.data);
         setShowSuggestions(true); // Show suggestions when there are results
       } catch (error) {
@@ -78,6 +78,7 @@ const SearchComponent = () => {
       {showSuggestions && (
         <ul className="absolute overflow-y-scroll max-h-20 bg-white z-1 left-0 right-0 rounded-md">
           {suggestions.map((suggestion) => (
+
             <li
               key={suggestion.id}
               className="pt-2 px-3 mb-2 flex items-center cursor-pointer"

@@ -132,106 +132,102 @@ const ProductCard = () => {
   };
 
 
-  products.forEach(element => {
-    console.log(`${process.env.REACT_APP_UPLOAD_URL+element.attributes?.image.data.attributes?.url}`)
-  });
+
 
   return (
-    <div className='container mb-10'>
+    <div className="container mb-10">
       <div className="row">
         {products?.map((product) => (
-          <div key={product?.id} className="max-w-sm cart col-xl-3 col-lg-4 col-md-6 col-sm-12 rounded-lg overflow-hidden wrap">
-            {data ?(
-              <>
-    {isProductFavorite(product.id) ? (
-      <button
-        onClick={() => handleToggleFavorite(product.id)}
-        className="py-1 relative heart text-center float-right top-[30px] right-[30px] text-white rounded"
-      >
-        <FaHeart className="inline-block mr-1 text-2xl text-black hover:text-gray-300 transition-colors duration-300 " />
-      </button>
-    ) : (
-      <button
-        onClick={() => handleToggleFavorite(product.id)}
-        className="py-1 relative heart text-center float-right top-[30px] right-[30px] text-white rounded"
-      >
-        <FaHeart className="inline-block mr-1 text-2xl text-gray-300 hover:text-black transition-colors duration-300 " />
-      </button>
-    )}
-    </>
-            ):
-            <button
-            onClick={() => navigate('/login')}
-            className="py-1 relative heart text-center float-right top-[30px] right-[30px] text-white rounded"
-          >
-            <FaHeart className="inline-block mr-1 text-2xl text-gray-300 hover:text-black transition-colors duration-300 " />
-          </button>
-            }
-        
-
-            <Link to={`/products/${product?.id}`}>
-              <img
-                src={`${process.env.REACT_APP_UPLOAD_URL}`+`${product.attributes?.image.data.attributes?.url}`}
-                alt={product.attributes?.name}
-                className="w-full max-h-[170px] object-contain object-center"
-              />
-            </Link>
-
-            <div className="p-4">
-              <h2 className="text-2xl font-semibold font-bold text-gray-800">{product.attributes?.name}</h2>
-              <p className="text-sm text-gray-600 mt-2">{product.attributes?.brand ? product.attributes.brand?.name : ''}</p>
-              <div className="flex">{calculateDisplayPrice(product)}</div>
-
-              <div className="mt-2 basket">
+          // Check if the product is available before displaying
+          product.attributes?.available && (
+            <div key={product?.id} className="max-w-sm cart col-xl-3 col-lg-4 col-md-6 col-sm-12 rounded-lg overflow-hidden wrap">
               {data ? (
-  <>
-    {isProductInCart(product.id) ? (
-      <button
-        onClick={() => handleAddToCart(product.id)}
-        className="bg-black basket float-right hover:bg-gray-300 transition-colors duration-300 relative top-[-10px] w-[50px] h-[50px] text-white rounded-[50%]"
-      >
-        <AiOutlineShopping className="text-2xl inline-block" />
-      </button>
-    ) : (
-      <button
-        onClick={() => handleAddToCart(product.id)}
-        className="bg-gray-300 basket float-right hover:bg-black transition-colors duration-300 relative top-[-10px] w-[50px] h-[50px] text-white rounded-[50%]"
-      >
-        <AiOutlineShopping className="text-2xl inline-block" />
-      </button>
-    )}
-  </>
-) : (
-  <button
-    onClick={() => navigate('/login')}
-    className="bg-gray-300 basket float-right hover:bg-black transition-colors duration-300 relative top-[-10px] w-[50px] h-[50px] text-white rounded-[50%]"
-  >
-    <AiOutlineShopping className="text-2xl inline-block" />
-  </button>
-)}
+                <>
+                  {isProductFavorite(product.id) ? (
+                    <button
+                      onClick={() => handleToggleFavorite(product.id)}
+                      className="py-1 relative heart text-center float-right top-[30px] right-[30px] text-white rounded"
+                    >
+                      <FaHeart className="inline-block mr-1 text-2xl text-black hover:text-gray-300 transition-colors duration-300 " />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleToggleFavorite(product.id)}
+                      className="py-1 relative heart text-center float-right top-[30px] right-[30px] text-white rounded"
+                    >
+                      <FaHeart className="inline-block mr-1 text-2xl text-gray-300 hover:text-black transition-colors duration-300 " />
+                    </button>
+                  )}
+                </>
+              ) : (
+                <button
+                  onClick={() => navigate('/login')}
+                  className="py-1 relative heart text-center float-right top-[30px] right-[30px] text-white rounded"
+                >
+                  <FaHeart className="inline-block mr-1 text-2xl text-gray-300 hover:text-black transition-colors duration-300 " />
+                </button>
+              )}
 
+              <Link to={`/products/${product?.id}`}>
+                <img
+                  src={`${process.env.REACT_APP_UPLOAD_URL}` + `${product.attributes?.image.data.attributes?.url}`}
+                  alt={product.attributes?.name}
+                  className="w-full max-h-[170px] object-contain object-center"
+                />
+              </Link>
 
-                {addedProduct === product.id && (
-                  <div className="fixed top-0 right-0 p-2 bg-green-500 text-white rounded-md">
-                    {/* Change the icon to a cross (close) when removing from the cart */}
-                    {isProductInCart(product.id) ? (
+              <div className="p-4">
+                <h2 className="text-2xl font-semibold font-bold text-gray-800">{product.attributes?.name}</h2>
+                <p className="text-sm text-gray-600 mt-2">{product.attributes?.brand ? product.attributes.brand?.name : ''}</p>
+                <div className="flex">{calculateDisplayPrice(product)}</div>
+
+                <div className="mt-2 basket">
+                  {data ? (
+                    <>
+                      {isProductInCart(product.id) ? (
+                        <button
+                          onClick={() => handleAddToCart(product.id)}
+                          className="bg-black basket float-right hover:bg-gray-300 transition-colors duration-300 relative top-[-10px] w-[50px] h-[50px] text-white rounded-[50%]"
+                        >
+                          <AiOutlineShopping className="text-2xl inline-block" />
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleAddToCart(product.id)}
+                          className="bg-gray-300 basket float-right hover:bg-black transition-colors duration-300 relative top-[-10px] w-[50px] h-[50px] text-white rounded-[50%]"
+                        >
+                          <AiOutlineShopping className="text-2xl inline-block" />
+                        </button>
+                      )}
+                    </>
+                  ) : (
+                    <button
+                      onClick={() => navigate('/login')}
+                      className="bg-gray-300 basket float-right hover:bg-black transition-colors duration-300 relative top-[-10px] w-[50px] h-[50px] text-white rounded-[50%]"
+                    >
+                      <AiOutlineShopping className="text-2xl inline-block" />
+                    </button>
+                  )}
+
+                  {addedProduct === product.id && (
+                    <div className="fixed top-0 right-0 p-2 bg-green-500 text-white rounded-md">
+                      {/* Change the icon to a cross (close) when removing from the cart */}
+                      {isProductInCart(product.id) ? (
                         <MdCheckCircle className="text-2xl cursor-pointer" onClick={() => setAddedProduct(null)} />
-
-                    ) : (
-                      <MdClose className="text-2xl cursor-pointer" onClick={() => setAddedProduct(null)} />
-
-                    )}
-                  </div>
-                )}
+                      ) : (
+                        <MdClose className="text-2xl cursor-pointer" onClick={() => setAddedProduct(null)} />
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+          )
         ))}
       </div>
       {isOrderPlaced && (
         <>
-        <ToastContainer autoClose={3000} hideProgressBar />
-        
+          <ToastContainer autoClose={3000} hideProgressBar />
         </>
       )}
     </div>

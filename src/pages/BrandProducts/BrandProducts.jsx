@@ -210,9 +210,12 @@ const BrandProducts = () => {
 
           <div className="row">
             {sortedProducts.map((product) => (
+                        product.attributes?.available && (
+
               <div key={product.id} className="col-md-6 col-lg-4 mb-3">
                 <ProductCategoryCard product={product} />
               </div>
+                        )
             ))}
           </div>
         </div>
