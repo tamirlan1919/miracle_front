@@ -4,7 +4,7 @@ import { BsHeart, BsHeartFill } from 'react-icons/bs';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaHeart } from 'react-icons/fa';
-import { getProductId} from '../../redux/slice/productSlice';
+import { getProductId,getProducts} from '../../redux/slice/productSlice';
 import { authMe, postProductInCart, postProductInFavorite } from "../../redux/slice/authSlice";
 import axios from '../../api.js';
 import  './ProductDeatils.css'; // Ensure the correct path
@@ -23,6 +23,7 @@ const ProductDetails = () => {
   const { slug } = useParams();
   const dispatch = useDispatch();
   const { products,status } = useSelector((state) => state.products);
+  const {all_products} = useSelector((state) => state.products);
   const { id } = useParams();
   const { data } = useSelector((state) => state.auth);
   const url = 'http:localhost:1377';
@@ -30,6 +31,7 @@ const ProductDetails = () => {
   useEffect(() => {
     console.log("RENDER");
     dispatch(getProductId(id));
+    dispatch(getProducts())
     dispatch(authMe());
   }, [dispatch, id]);
 
@@ -41,28 +43,8 @@ const ProductDetails = () => {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(true);
   const [isReviewsOpen, setIsReviewsOpen] = useState(false);
   const [mainImage, setMainImage] = useState('');
-  const [all_products,SetAllProducts] = useState([])
 
-  useEffect(() => {
-    // Fetch data from the API when the component mounts
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/products?populate=*`, {
-          headers: {
-            Authorization: 'Bearer ' + '4738350533aa2646e326070492ea2cfcc61bd9e9b3af35f14367ebae1cd21c888e5012903cd055b11862b728e97f75dca6b5fbfcf0959ea028ced92086037ff57744682682cac6f0241222a679e0b58689760735c624f69134b1e3d230e10e1437bf1e4d2e7dd2947b5ec0174529813e7fc1084dd92d4eaca44d274f30da3af8',
-          },
-        });
 
-        SetAllProducts(response.data.data); // Access the 'data' property in the response
-
-      } catch (error) {
-        console.error('Error during fetch:', error);
-      }
-    };
-
-    fetchData(); // Call the fetchData function
-
-  }, []); // Empty dependency array to run once on mount
 
  
 
@@ -386,7 +368,7 @@ const ProductDetails = () => {
 
         <div className="row">
           <h1 className='text-2xl  text-center pt-10 mb-5'>Похожие товары</h1>
-          {all_products.map((products) => (
+          {all_products?.map((products) => (
               (products.id!=id ? 
           <div key={products.id} className="max-w-sm cart col-xl-3 col-lg-3 col-md-6 col-sm-12 rounded-lg overflow-hidden">
             <Link to={`/products/${products.id}`}>

@@ -162,6 +162,7 @@ const Header = () => {
       </div>
     </div>
   </div>
+  
 </div>
 
       <COffcanvas placement="start" className= 'text-black z-[9999999]' scroll={true} visible={isModalOpen} onHide={closeModal}>
@@ -191,6 +192,8 @@ const Header = () => {
           {status === 'error' && <p>Error loading categories.</p>}
         </COffcanvasBody>
       </COffcanvas>
+      
+      
       {/* <div className="floating-button" >
       <svg className="circle" viewBox="0 0 100 100">
   <path id="circle" d="M 0,50 a 50,50 0 1,1 0,1 z" />

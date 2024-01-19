@@ -25,3 +25,14 @@ margin-bottom: 70px;
     background-color: #028103;
     transition-timing-function: ease-in;
 }
+
+@media(max-width:767px){
+    .brandsnew{
+        text-align: center;
+
+        margin: 0 auto;
+    }
+    .brandsnew img{
+        margin: 20px auto;
+    }
+}

@@ -23,7 +23,7 @@ const Brands = () => {
     <div className=''>
       <div className="container main">
               <h1 className='bra'>Выбери свою категорию</h1>
-        <div className="row">
+        <div className="row brandsnew">
 
 
           {brands.slice(0, 3).map((brand) => (

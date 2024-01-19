@@ -12,7 +12,7 @@ const FooterCamp = () => {
       <Container className={classes.inner}>
         {/* Use your custom logo here */}
         <img src={IfameLogo} alt="iFame Logo" style={{ width: '200px', height: 'auto' }} />
-
+        <a href='https://t.me/timaadev' target='_blank'>Разработчик сайта</a>
         <Group gap={0} className={classes.links} justify="flex-end" wrap="nowrap">
           <ActionIcon size="lg" color="gray" variant="subtle" className='mr-5'>
             <IconBrandTwitter style={{ width: rem(18), height: rem(18) }} stroke={1.5} />

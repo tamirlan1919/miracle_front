@@ -207,7 +207,7 @@ const Cart = () => {
                     <img
                       src={`${process.env.REACT_APP_UPLOAD_URL}`+`${attributes?.image.data.attributes.formats.thumbnail.url}`}
                       alt=""
-                      className="w-[200px]"
+                      className="max-w-[200px] p-2"
                     />
                   </div>
                   <div className="col-md-8">

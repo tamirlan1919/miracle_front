@@ -11,7 +11,7 @@ const Home = () => {
 
     <Carousel/>
     <CarousBrands/>
-    <h1 className='text-2xl text-center py-10'>Новинки</h1>
+    <h1 className='text-2xl text-center py-10 font-apple'>Товары</h1>
     <ProductCard/>
     <Brands/>
     <OurClients/>
