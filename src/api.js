@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://5.35.90.79:1338/api",
+  baseURL: "https://justadmin.ru/api",
   headers: {
     Authorization:
       "Bearer " +
