@@ -17,7 +17,7 @@ import './Header.css';
 import img from './Frame 1 (3).svg';
 import { CButton, COffcanvas, COffcanvasHeader, COffcanvasTitle, CCloseButton, COffcanvasBody } from '@coreui/react';
 
-
+import img1 from './whatsapp.svg'
 const Header = () => {
   const dispatch = useDispatch();
   const { categories, status } = useSelector((state) => state.categories);
@@ -162,7 +162,9 @@ const Header = () => {
       </div>
     </div>
   </div>
-  
+  <div className="elem max-w-[50px]" >
+    <img src={img1} alt=""  />
+  </div>
 </div>
 
       <COffcanvas placement="start" className= 'text-black z-[9999999]' scroll={true} visible={isModalOpen} onHide={closeModal}>

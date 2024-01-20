@@ -167,8 +167,17 @@ header {
 .net{
   display: none;
 }
-
+.elem{
+  position: fixed;
+  bottom: 20px;
+  right: 10px;
+}
 @media(max-width:767px){
+  .elem{
+  position: fixed;
+  top: 20px;
+  right: 10px;
+}
   .wrap p{
     left: -5px;
   }
