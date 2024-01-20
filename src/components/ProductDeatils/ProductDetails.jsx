@@ -47,11 +47,7 @@ const ProductDetails = () => {
     // Fetch data from the API when the component mounts
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/products?populate=*`, {
-          headers: {
-            Authorization: 'Bearer ' + '4738350533aa2646e326070492ea2cfcc61bd9e9b3af35f14367ebae1cd21c888e5012903cd055b11862b728e97f75dca6b5fbfcf0959ea028ced92086037ff57744682682cac6f0241222a679e0b58689760735c624f69134b1e3d230e10e1437bf1e4d2e7dd2947b5ec0174529813e7fc1084dd92d4eaca44d274f30da3af8',
-          },
-        });
+        const response = await axios.get(`/products?populate=*`);
 
         SetAllProducts(response.data.data); // Access the 'data' property in the response
 

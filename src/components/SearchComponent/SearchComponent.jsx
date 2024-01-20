@@ -85,7 +85,7 @@ const SearchComponent = () => {
               onClick={() => handleSelect(suggestion.attributes.name, suggestion.id)}
             >
               <img
-                src={`${process.env.REACT_APP_UPLOAD_URL}`+`${suggestion.attributes?.image.data.attributes.url}`}
+                src={`${process.env.REACT_APP_UPLOAD_URL}`+`${suggestion.attributes?.image?.data?.attributes?.url}`}
                 alt={suggestion.attributes.name}
                 className="w-9 h-12 mr-2"
               />
