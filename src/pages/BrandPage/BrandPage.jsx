@@ -64,6 +64,7 @@ const BrandPage = () => {
             {brands
               .filter((brand) => brand.attributes?.name.charAt(0).toUpperCase() === letter)
               .map((brand) => (
+                
                 <div key={brand?.id} className="col mb-10">
                   <a href={`/brands/${brand.attributes?.name}`} className="text-black">
                     {brand.attributes?.name}

@@ -55,12 +55,13 @@ export default function Registration() {
         setIsOrderPlaced(true);
       } else if (request.payload) {
         // Успешная регистрация, перенаправление на страницу проверки почты
-        toast.success("Регистрация прошла успешно, проверьте почту", {
+        toast.success("Регистрация прошла успешно", {
           position: toast.POSITION.TOP_RIGHT,
         });
        
         // Trigger the callback function provided by the parent component
         setIsOrderPlaced(true);
+        navigate('/')
       } else if (request.payload && request.payload.jwt) {
         // Успешная регистрация
         setSuccessMessage('Регистрация успешна!');
