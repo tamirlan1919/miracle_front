@@ -162,8 +162,10 @@ const Header = () => {
       </div>
     </div>
   </div>
-  <div className="elem max-w-[50px]" >
+  <div className="elem max-w-[50px] z-[99999]" >
+    <a href="https://api.whatsapp.com/message/IDNHAJAWK2HWB1?autoload=1&app_absent=0">
     <img src={img1} alt=""  />
+    </a>
   </div>
 </div>
 

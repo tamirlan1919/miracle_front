@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {YMaps,Map,Placemark} from '@pbe/react-yandex-maps'
 
 const Work = () => {
   const [works, setWorks] = useState([]);
@@ -41,14 +42,16 @@ const Work = () => {
 
         {/* Middle column for map */}
         <div className="col-span-1 md:col-span-2 mb-8">
-          <iframe
-            title="Yandex Map"
-            width="100%"
-            height="500"
-            frameBorder="1"
-            className="rounded-lg overflow-hidden"
-            src="https://yandex.ru/map-widget/v1/?ll=39.735345%2C47.228816&mode=search&oid=149705269337&ol=biz&z=16.51"
-          ></iframe>
+        <div className='w-full'>
+      <YMaps>
+  <Map width={'100%'} height={'350px'} defaultState={{ center: [47.20371731622419, 39.652542057131036], zoom: 9 }}>
+    <Placemark defaultGeometry={[47.219931, 39.715747]} />
+    <Placemark defaultGeometry={[47.229020, 39.735467]} />
+
+  </Map>
+</YMaps>;
+</div>
+
         </div>
 
         {/* Right column for job details */}
