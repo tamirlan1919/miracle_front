@@ -9,7 +9,7 @@ const initialState = {
 
 export const getProducts = createAsyncThunk("/getProducts", async () => {
   try {
-    const { data } = await axios.get("/products?populate=*");
+    const { data } = await axios.get("/products?populate=*&pagination[page]=1&pagination[pageSize]=99999");
     return data.data;
   } catch (error) {
     console.warn(error);
@@ -19,7 +19,7 @@ export const getProducts = createAsyncThunk("/getProducts", async () => {
 
 export const getBrands = createAsyncThunk("/getBrands", async () => {
   try {
-    const { data } = await axios.get("/brands?populate=*");
+    const { data } = await axios.get("/brands?populate=*&pagination[page]=1&pagination[pageSize]=99999");
     return data.data;
   } catch (error) {
     console.warn(error);
@@ -29,7 +29,7 @@ export const getBrands = createAsyncThunk("/getBrands", async () => {
 
 export const getCategories = createAsyncThunk("/getCategories", async () => {
   try {
-    const { data } = await axios.get("/categories?populate=*");
+    const { data } = await axios.get("/categories?populate=*pagination[page]=1&pagination[pageSize]=99999");
     return data.data;
   } catch (error) {
     console.warn(error);
