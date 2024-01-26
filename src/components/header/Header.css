@@ -95,8 +95,10 @@ header {
   align-items: center;
 }
 @media(max-width:991px){
+ 
   .home,.menu{
     display: block;
+    
   }
   .users{
     height: 50px;
@@ -104,10 +106,12 @@ header {
     z-index: 999;
     position:fixed;
     align-self: flex-start;
-    bottom: 5px;
+    bottom: -10px;
+    
     left: 0px;
     right: 0px;
     padding-left: 0px;
+    padding-bottom: 50px;
     justify-content: space-between;
   }
   .user{
