@@ -196,7 +196,8 @@ const Header = () => {
           {status === 'error' && <p>Error loading categories.</p>}
         </COffcanvasBody>
       </COffcanvas>
-      
+     
+
       
       {/* <div className="floating-button" >
       <svg className="circle" viewBox="0 0 100 100">
