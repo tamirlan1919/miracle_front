@@ -110,27 +110,31 @@ const ProductCard = () => {
   if (!Array.isArray(products)) {
     return <div>No products available</div>;
   }
+
   const calculateDisplayPrice = (product) => {
+    const isOilPerfume = product.attributes?.category?.data?.attributes?.name === 'Маслянные духи';
+  
     if (isNewPrice(product)) {
       return (
         <>
           <span className="text-[20px] text-gray-800 mt-2 mr-2">
-            {parseFloat(product.attributes?.price).toFixed(2)}₽
+            {parseFloat(product.attributes?.price).toFixed(2)} ₽ 
+            {isOilPerfume && ' за 1 мл'}
           </span>
           <span className="text-[18px] text-gray-400 mt-2">
-            <s>{parseFloat(product.attributes?.old_price).toFixed(2)}₽</s>
+            <s>{parseFloat(product.attributes?.old_price).toFixed(2)} ₽</s>
           </span>
         </>
       );
     } else {
       return (
         <span className="text-[20px] text-gray-800 mt-2 mr-2">
-          {parseFloat(product.attributes?.price).toFixed(2)}₽
+          {parseFloat(product.attributes?.price).toFixed(2)} ₽
+          {isOilPerfume && ' за 1 мл'}
         </span>
       );
     }
   };
-
 
 
 

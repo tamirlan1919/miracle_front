@@ -200,28 +200,31 @@ const ProductDetails = () => {
 
 
 
-  const calculateDisplayPrice = (products) => {
-    if (isNewPrice(products)) {
-      const discountPercent = ((products.attributes?.old_price - products.attributes?.price) / products.attributes?.old_price) * 100;
+  const calculateDisplayPrice = (product) => {
+    const isOilPerfume = product.attributes?.category?.data?.attributes?.name === 'Маслянные духи';
+  
+    if (isNewPrice(product)) {
       return (
         <>
           <span className="text-[20px] text-gray-800 mt-2 mr-2">
-            {parseFloat(products.attributes?.price).toFixed(2)}₽
+            {parseFloat(product.attributes?.price).toFixed(2)} ₽ 
+            {isOilPerfume && ' за 1 мл'}
           </span>
           <span className="text-[18px] text-gray-400 mt-2">
-            <s>{parseFloat(products.attributes?.old_price).toFixed(2)}₽</s>
-            <span className="ml-2 text-red-500">-{discountPercent.toFixed(0)}%</span>
+            <s>{parseFloat(product.attributes?.old_price).toFixed(2)} ₽</s>
           </span>
         </>
       );
     } else {
       return (
         <span className="text-[20px] text-gray-800 mt-2 mr-2">
-          {parseFloat(products.attributes?.price).toFixed(2)}₽
+          {parseFloat(product.attributes?.price).toFixed(2)} ₽
+          {isOilPerfume && ' за 1 мл'}
         </span>
       );
     }
   };
+
   useEffect(() => {
     if (products && products.attributes?.image && products.attributes?.image.data) {
       setMainImage(`${process.env.REACT_APP_UPLOAD_URL}`+`${products.attributes?.image.data.attributes.url}`);
@@ -304,14 +307,17 @@ const ProductDetails = () => {
           </div>
           <hr />
           <div className="volume-select mt-5 mb-5">
-          <p>Кол-во на складе {products.attributes?.stock}</p>
-            <p>ID {products.attributes?.sclad_id}</p>
+          <p>
+  {products?.attributes?.category?.data?.attributes?.name === 'Маслянные духи'
+    ? `На складе ${products.attributes?.stock} мл`
+    : `Кол-во на складе ${products.attributes?.stock} штук`}
+</p>            <p>ID {products.attributes?.sclad_id}</p>
           </div>
           <hr />
           <div className="quantity mt-5 flex flex-wrap">
             {data ? (
               <>
- {isProductInCart ? (
+{isProductInCart ? (
   <>
     <div className="add">
       <button onClick={() => handlePostCartWithQuantity(id, quantity)} disabled={quantity <= 0 || quantity > maxStock}>
@@ -326,12 +332,11 @@ const ProductDetails = () => {
   </>
 ) : (
   <>
-  
     <div className="colich flex">
       <button className="px-[16px] text-2xl mr-5" onClick={handleDecrement}>
         -
       </button>
-      <p className="text-2xl">{quantity}</p>
+      <p className="text-2xl">{products.attributes?.category?.data?.attributes?.name === 'Маслянные духи' ? `${quantity} мл` : quantity}</p>
       <button className="px-[16px] text-2xl ml-5" onClick={handleIncrement}>
         +
       </button>
@@ -346,9 +351,9 @@ const ProductDetails = () => {
         {isProductInFavorite ? <BsHeartFill /> : <BsHeart />}
       </button>
     </div>
-
   </>
 )}
+
 </>
             ):
             <>

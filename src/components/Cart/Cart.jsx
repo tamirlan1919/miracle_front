@@ -222,7 +222,7 @@ const Cart = () => {
                           >
                             -
                           </button>
-                          <p className="mb-0 text-2xl ">{getProductQuantity(id)}</p>
+                          <p className="mb-0 text-2xl ">{getProductQuantity(id)} {attributes?.category?.data?.attributes?.name == 'Маслянные духи' ? 'мл' : ''}</p>
                           <button
                             className="btn btn-outline-secondary ms-2"
                             onClick={() => setProductQuantity(id, getProductQuantity(id) + 1)}
